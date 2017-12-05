@@ -8,10 +8,11 @@ class V1::UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    debugger
+    @user.is_admin = false
     if @user.save
-      login(@user)
 
+      login(@user)
+      debugger
       render 'v1/users/show'
     else
       render json: @user.errors.full_messages, status: 422
@@ -31,6 +32,7 @@ class V1::UsersController < ApplicationController
   private
 
   def user_params
+    p params
     params.require(:user).permit(:username, :games_won, :games_lost, :times_bad, :times_good, :is_admin, :password)
   end
 end
