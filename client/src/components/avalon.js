@@ -1,43 +1,35 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './avalon.css';
-import $ from 'jquery';
+import './avalon.css'
+import React from 'react'
+import { Provider } from 'react-redux'
+import PropTypes from 'prop-types'
+import AuthRoute from '../shared/util/route_util'
+import {
+  Route,
+  Redirect,
+  Switch,
+  Link,
+  Router,
+  HashRouter
+} from 'react-router-dom'
 
-class Avalon extends Component {
-  render() {
-    $.ajax({
-      url: 'http://localhost:3001/v1/users',
-      data: {
-        user: {
-          username: 'rdfsffssdfsoyfasdfcdffasdfde',
-          password: '123456',
-          is_admin: false
-        }},
-      method: 'POST'
-    }).then(e => {
-      debugger
-    });
+import AuthForm from './auth_form'
 
-    $.ajax({
-      url: 'http://localhost:3001/v1/users',
-      method: 'GET'
-    }).then(e => {
-      debugger
-    })
 
-    debugger
-    return (
-      <div className="Avalon">
-        <header className="Avalon-header">
-          <img src={logo} className="Avalon-logo" alt="logo" />
-          <h1 className="Avalon-title">Welcome to React</h1>
+const Avalon = ({store, getState}) =>  {
+  return (
+    <div className='app-container'>
+        <header>
         </header>
-        <p className="Avalon-intro">
-          To get started, edit <code>src/Avalon.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
+
+        <AuthRoute exact path='/login' component={ AuthForm }/>
+        <AuthRoute exact path='/signup' component={ AuthForm }/>
+    </div>
+  )
+}
+
+Avalon.propTypes = {
+  store: PropTypes.object,
+  getState: PropTypes.func
 }
 
 export default Avalon;
