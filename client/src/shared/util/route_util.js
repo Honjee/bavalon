@@ -13,7 +13,9 @@ const Auth = ({ component: Component, path, loggedIn }) => (
 )
 
 const mapStateToProps = state => {
-  return { loggedIn: Boolean(state.session.currentUser)}
+  const session = state.get('session')
+  const currentUser = session.getIn(['currentUser'])
+  return { loggedIn: Boolean(currentUser)}
 }
 
 const AuthRoute = withRouter(
