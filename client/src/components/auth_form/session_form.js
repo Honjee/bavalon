@@ -13,8 +13,10 @@ class SessionForm extends React.Component {
     this.setState = this.setState.bind(this)
   }
 
-  updateField(){
-
+  update(field){
+    return e => {
+      this.setState({ [field]:e.target.value })
+    }
   }
 
   getAuthForm() {
@@ -28,8 +30,19 @@ class SessionForm extends React.Component {
           className='form-input'
           id='email'
           type='text'
-          onChange={ this.updateField(email) }
+          onChange={ this.update(email) }
           placeholder={ email } />
+        <label>{ password }</label>
+        <input
+          className='form-input'
+          id='password'
+          type='password'
+          onChange={ this.update(email) }
+          placeholder={ password } />
+        <input
+          className='form-submit'
+          type='submit'
+          value={ this.props.formType } />
       </form>
     )
   }

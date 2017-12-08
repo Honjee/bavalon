@@ -1,5 +1,5 @@
 import { RECEIVE_CURRENT_USER } from './actions'
-import { Map, fromJS } from 'immutable'
+import { Map, fromJS, get } from 'immutable'
 
 const initialState = fromJS({
   currentUser: null
@@ -8,10 +8,10 @@ const initialState = fromJS({
 const SessionReducer = (state = initialState, action) => {
   switch(action.type) {
     case RECEIVE_CURRENT_USER:
-      return state.set('currentUser', action.currentUser)
-    default:
-      return state;
+      state = state.setIn(['currentUser', get(action, 'currentUser')], null)
   }
+  
+  return state
 }
 
 export default fromJS(SessionReducer)
