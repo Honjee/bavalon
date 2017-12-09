@@ -11,6 +11,7 @@ const setupStore = () => {
             configureStore({ session: window.currentUser }) :
             configureStore()
 
+  window.store = store
   return store
 }
 
