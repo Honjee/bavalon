@@ -13,6 +13,7 @@ import {
 } from 'react-router-dom'
 
 import AuthForm from './auth_form'
+import HomeContainer from './home_container'
 
 
 const Avalon = ({store, getState}) =>  {
@@ -23,6 +24,7 @@ const Avalon = ({store, getState}) =>  {
 
         <AuthRoute exact path='/login' component={ AuthForm }/>
         <AuthRoute exact path='/signup' component={ AuthForm }/>
+        <Route exact path='/lobby' component={ HomeContainer }/>
     </div>
   )
 }
