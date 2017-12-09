@@ -9,10 +9,9 @@ class V1::UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.is_admin = false
-    if @user.save
 
+    if @user.save
       login(@user)
-      debugger
       render 'v1/users/show'
     else
       render json: @user.errors.full_messages, status: 422
