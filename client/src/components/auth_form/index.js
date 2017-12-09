@@ -4,9 +4,13 @@ import { signUp, logIn } from './actions'
 
 const mapStateToProps = (state, ownProps) => {
   const loggedIn = state.currentUser ? true : false
+  const redirect = ownProps.match.path === '/signup' ? "Log In" : "Sign Up"
+  const redirectPath = ownProps.match.path === '/signup' ? '/login' : '/signup'
   // const errors = state.get('errors.session')
   return {
     loggedIn,
+    redirect,
+    redirectPath
     // errors
   }
 }
