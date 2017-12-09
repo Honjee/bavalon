@@ -1,24 +1,8 @@
-# README
+# Better Avalon
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Scripts
+`run: npm run start:dev` # Starts rails server / react build
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Local Settings
+rails runs on `locahost:3001` 
+react runs on `locahost:3000`
