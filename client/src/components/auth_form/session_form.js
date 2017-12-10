@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import Style from './style.css'
 
+import { redirectLoggedIn } from '../../shared/util/on_enter'
+
 const CREDENTIALS = {
   username: 'Username',
   password: 'Password'
@@ -13,6 +15,10 @@ class SessionForm extends React.Component {
     super(props)
     this.setState = this.setState.bind(this)
     this.processForm = this.processForm.bind(this)
+  }
+
+  componentWillMount() {
+    redirectLoggedIn(this.props.session, this.props.history)
   }
 
   update(field) {
@@ -70,7 +76,9 @@ SessionForm.propTypes = {
   formType: PropTypes.string,
   processForm: PropTypes.func,
   redirect: PropTypes.string,
-  redirectPath: PropTypes.string
+  redirectPath: PropTypes.string,
+  session: PropTypes.object,
+  history: PropTypes.object
 }
 
 export default SessionForm

@@ -4,8 +4,12 @@ import { withRouter } from 'react-router-dom'
 import { createRoom } from './actions'
 
 const mapStateToProps = (state, ownProps) => {
+  const session = state.getIn(['session'])
+  const [ ...keys ] = session.keys();
+  const userId = parseInt(keys[0])
+  
   return {
-
+    userId
   }
 }
 

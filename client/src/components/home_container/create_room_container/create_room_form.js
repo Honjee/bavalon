@@ -10,7 +10,7 @@ const { MINIONS, VILLAGERS, MAPPING } = C
 class CreateRoomForm extends React.Component {
   constructor(props) {
     super(props)
-    // this.state={ [MINIONS.MORDRED]: }
+    this.state={ [MINIONS.MORDRED]: false, [MINIONS.OBERON]: false, [VILLAGERS.PERCIVAL]: true }
     this.checkCharacter = this.checkCharacter.bind(this)
     this.roomSubmit = this.roomSubmit.bind(this)
   }
@@ -26,24 +26,33 @@ class CreateRoomForm extends React.Component {
     return(
       <div className='checkbox-wrapper' >
         <label className='checkbox-label'>{ MAPPING[char] }</label>
-        <input className='checkbox' type='checkbox' onClick={ this.checkCharacter(char) } />
+        <input
+          className='checkbox'
+          checked={ this.state[char] }
+          type='checkbox'
+          onChange={ this.checkCharacter(char) } />
       </div>
     )
   }
 
-  linkToRoom() {
-
+  linkToRoom(roomId) {
+    this.props.history.replace(`/rooms/${roomId}`)
   }
 
   roomSubmit() {
-    this.props.createRoom(this.state).then()
+    const room = this.state
+    room.owner_id = this.props.userId
+    this.props.createRoom(room).then((room) => {
+      debugger
+      this.linkToRoom()
+    })
   }
 
   render() {
     const mordred = this.getCheckBox(MINIONS.MORDRED)
     const oberon = this.getCheckBox(MINIONS.OBERON)
     const percival = this.getCheckBox(VILLAGERS.PERCIVAL)
-    debugger
+
     return(
       <div className='create-room-container'>
         <h2 className='create-room-header'> Create room </h2>
@@ -60,7 +69,9 @@ class CreateRoomForm extends React.Component {
 }
 
 CreateRoomForm.propTypes = {
-  createRoom: PropTypes.func
+  createRoom: PropTypes.func,
+  history: PropTypes.object,
+  userId: PropTypes.number
 }
 
 export default CreateRoomForm

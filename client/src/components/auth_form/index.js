@@ -1,8 +1,10 @@
 import SessionForm from './session_form'
 import { connect } from 'react-redux'
 import { signUp, logIn } from './actions'
+import { withRouter } from 'react-router-dom'
 
 const mapStateToProps = (state, ownProps) => {
+  const session = state.getIn(['session'])
   const loggedIn = state.currentUser ? true : false
   const redirect = ownProps.match.path === '/signup' ? "Log In" : "Sign Up"
   const redirectPath = ownProps.match.path === '/signup' ? '/login' : '/signup'
@@ -28,4 +30,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(SessionForm)
+)(withRouter(SessionForm))
