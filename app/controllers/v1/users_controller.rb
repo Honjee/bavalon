@@ -31,7 +31,6 @@ class V1::UsersController < ApplicationController
   private
 
   def user_params
-    p params
     params.require(:user).permit(:username, :games_won, :games_lost, :times_bad, :times_good, :is_admin, :password)
   end
 end
