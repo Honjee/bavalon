@@ -33,13 +33,13 @@
   width: 70vw
 }
 
-.form-submit {
+form input[type="submit"] {
   -webkit-apperance: none;
   font-family: 'Spectral SC', serif;
   font-size: 2vh;
   margin-top: 2vh;
-  height: 5vh;
-  width: 30vw;
+  height: 7vh;
+  width: 35vw;
   color: rgb(0, 9, 80);
   background-color: white;
 }

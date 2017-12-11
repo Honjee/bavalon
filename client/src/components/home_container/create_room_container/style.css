@@ -1,11 +1,23 @@
 .create-room-container {
     height: 80vh;
     width: 100vw;
-    background-color: black;
     display: flex;
     text-align: center;
     flex-direction: column;
-    justify-content: center;
     align-content: center;
-
 }
+h3 {
+    font-size: 5vh;
+}
+
+
+.checkbox-wrapper {
+    font-size: 5vh;
+}
+input[type="checkbox"]{
+    width: 5vh; 
+    height: 5vh;  
+}
+
+
+  
