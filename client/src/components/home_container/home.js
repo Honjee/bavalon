@@ -32,10 +32,14 @@ class Home extends React.Component {
 
   getJoinRoom() {
     return(
+      <div className="join-room-container">
+      <h1>Join Room</h1>
       <form className='join-room-form' >
         <input className='join-room-input' type='text' placeholder='0000' onChange={ this.updateField }/>
-        <input className='join-room-submit' type='submit' value='Join Room' onClick={ this.joinRoom } />
+        <br></br>
+        <input className='join-room-submit' type='submit' value='Enter' onClick={ this.joinRoom } />
       </form>
+      </div>
     )
   }
 
