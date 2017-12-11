@@ -15,34 +15,16 @@ import {
 import AuthForm from './auth_form'
 import HomeContainer from './home_container'
 
+
 const Avalon = ({store, getState}) =>  {
-
-  const _getSession = () => {
-    return store.getState().getIn(['session'])
-  }
-
-  const _ensuredLoggedIn = (nextState, replace) => {
-    const session = _getSession()
-    if(session) {
-      replace('/login')
-    }
-  }
-
-  const _redirectIfLoggedIn = (nextState, replace) => {
-    const session = _getSession()
-    if(session) {
-      replace('/lobby')
-    }
-  }
-
   return (
     <div className='app-container'>
         <header>
         </header>
 
-        <AuthRoute exact path='/login' onEnter={ _redirectIfLoggedIn } component={ AuthForm }/>
-        <AuthRoute exact path='/signup' onEnter={ _redirectIfLoggedIn } component={ AuthForm }/>
-        <Route exact path='/lobby' onEnter={ _ensuredLoggedIn }component={ HomeContainer }/>
+        <AuthRoute exact path='/login' component={ AuthForm }/>
+        <AuthRoute exact path='/signup' component={ AuthForm }/>
+        <Route exact path='/lobby' component={ HomeContainer }/>
     </div>
   )
 }
