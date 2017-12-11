@@ -36,7 +36,7 @@ class Home extends React.Component {
       <h1>Join Room</h1>
       <form className='join-room-form' >
         <input className='join-room-input' type='text' placeholder='0000' onChange={ this.updateField }/>
-        <br></br>
+        <br />
         <input className='join-room-submit' type='submit' value='Enter' onClick={ this.joinRoom } />
       </form>
       </div>
