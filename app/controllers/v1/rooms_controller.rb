@@ -5,11 +5,9 @@ class V1::RoomsController < ApplicationController
 
   def create
     @room = Room.new(room_params)
-
     @room.name = Faker::Pokemon.name.downcase
     @room.owner_id = current_user.id if !@room.owner_id && current_user
 
-    @room = current_user.id
     if @room.save
       render 'v1/rooms/show'
     else
