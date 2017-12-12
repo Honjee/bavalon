@@ -1,18 +1,18 @@
-import * as MINIONS from './minions'
-import * as VILLAGERS from './villagers'
+import * as M from './minions'
+import * as V from './villagers'
 
 const MAPPING = {
-  [MINIONS.MORDRED]: 'Mordred',
-  [MINIONS.OBERON]: 'Oberon',
-  [MINIONS.MORGANA]: 'Morgana',
-  [MINIONS.ASSASSIN]: 'Assassin',
-  [VILLAGERS.MERLIN]: 'Merlin',
-  [VILLAGERS.PERCIVAL]: 'Percival',
-  [VILLAGERS.VILLAGER]: 'Villager'
+  [M.hasMordred]: 'Mordred',
+  [M.hasOberon]: 'Oberon',
+  [M.hasMorgana]: 'Morgana',
+  [M.hasAssassin]: 'Assassin',
+  [V.hasMerlin]: 'Merlin',
+  [V.hasPercival]: 'Percival',
+  [V.hasVillager]: 'Villager'
 }
 const CONSTANTS = {
-  MINIONS,
-  VILLAGERS,
+  M,
+  V,
   MAPPING
 }
 

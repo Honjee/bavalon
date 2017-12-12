@@ -1,9 +1,9 @@
-export const MERLIN = 'MERLIN'
-export const PERCIVAL = 'PERCIVAL'
-export const VILLAGER = 'VILLAGER'
+export const hasMerlin = 'hasMerlin'
+export const hasPercival = 'hasPercival'
+export const hasVillager = 'hasVillager'
 
 export const MAPPING = {
-  MERLIN: 'Merlin',
-  PERCIVAL: 'Percival',
-  VILLAGER: 'Villager'
+  hasMerlin: 'Merlin',
+  hasPercival: 'Percival',
+  hasVillager: 'Villager'
 }
