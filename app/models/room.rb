@@ -14,5 +14,5 @@
 #
 
 class Room < ApplicationRecord
-  validates :pin, :hasMordred, :hasOberon, :hasPercival, presence: true
+  validates :owner_id, :name, presence: true
 end
