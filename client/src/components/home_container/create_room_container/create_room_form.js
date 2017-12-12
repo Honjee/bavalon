@@ -4,21 +4,26 @@ import { Link } from 'react-router-dom'
 import Style from './style.css'
 
 import C from '../../../shared/constants'
+import { ensureLoggedIn } from '../../../shared/util/on_enter'
 
-const { MINIONS, VILLAGERS, MAPPING } = C
+const { M, V, MAPPING } = C
 
 class CreateRoomForm extends React.Component {
   constructor(props) {
     super(props)
-    this.state={ [MINIONS.MORDRED]: false, [MINIONS.OBERON]: false, [VILLAGERS.PERCIVAL]: true }
+    this.state={ [M.hasMordred]: false, [M.hasOberon]: false, [V.hasPercival]: true }
     this.checkCharacter = this.checkCharacter.bind(this)
     this.roomSubmit = this.roomSubmit.bind(this)
+  }
+
+  componentWillMount() {
+    ensureLoggedIn(this.props.session, this.props.history)
   }
 
   checkCharacter(char) {
     return (e) => {
       const checked = e.target.checked
-      this.setState({ char: checked })
+      this.setState({ [char]: checked })
     }
   }
 
@@ -42,16 +47,16 @@ class CreateRoomForm extends React.Component {
   roomSubmit() {
     const room = this.state
     room.owner_id = this.props.userId
+
     this.props.createRoom(room).then((room) => {
-      debugger
-      this.linkToRoom()
+      this.linkToRoom(room.id)
     })
   }
 
   render() {
-    const mordred = this.getCheckBox(MINIONS.MORDRED)
-    const oberon = this.getCheckBox(MINIONS.OBERON)
-    const percival = this.getCheckBox(VILLAGERS.PERCIVAL)
+    const mordred = this.getCheckBox(M.hasMordred)
+    const oberon = this.getCheckBox(M.hasOberon)
+    const percival = this.getCheckBox(V.hasPercival)
 
     return(
       <div className='create-room-container'>
@@ -71,7 +76,8 @@ class CreateRoomForm extends React.Component {
 CreateRoomForm.propTypes = {
   createRoom: PropTypes.func,
   history: PropTypes.object,
-  userId: PropTypes.number
+  userId: PropTypes.number,
+  session: PropTypes.object
 }
 
 export default CreateRoomForm

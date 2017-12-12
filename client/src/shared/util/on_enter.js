@@ -1,11 +1,11 @@
 export const ensureLoggedIn = (session, history) => {
-  if(!session) {
-    this.history.replace('/login')
+  if(session.isEmpty()) {
+    history.replace('/login')
   }
 }
 
 export const redirectLoggedIn = (session, history) => {
-  if(session) {
-    this.history.replace('/lobby')
+  if(session && !session.isEmpty()) {
+    history.replace('/lobby')
   }
 }

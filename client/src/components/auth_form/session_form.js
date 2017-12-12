@@ -41,7 +41,8 @@ class SessionForm extends React.Component {
   }
 
   processForm() {
-    this.props.processForm(this.state)
+    const { history, linkToLobby } = this.props
+    this.props.processForm(this.state).then(() => linkToLobby(history))
   }
 
   getAuthForm() {
@@ -78,7 +79,8 @@ SessionForm.propTypes = {
   redirect: PropTypes.string,
   redirectPath: PropTypes.string,
   session: PropTypes.object,
-  history: PropTypes.object
+  history: PropTypes.object,
+  linkToLobby: PropTypes.func
 }
 
 export default SessionForm
