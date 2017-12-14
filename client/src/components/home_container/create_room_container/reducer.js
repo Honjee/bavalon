@@ -1,6 +1,6 @@
 import { Map, fromJS } from 'immutable'
 
-import { RECEIVE_CURRENT_ROOM } from './actions'
+import { RECEIVE_ROOM } from './actions'
 
 const initialState = fromJS({
   room: {}
@@ -8,7 +8,7 @@ const initialState = fromJS({
 
 const RoomReducer = (state = initialState, action) => {
   switch(action.type) {
-    case RECEIVE_CURRENT_ROOM:
+    case RECEIVE_ROOM:
       state = state.setIn(['room'], fromJS(action.room))
   }
 

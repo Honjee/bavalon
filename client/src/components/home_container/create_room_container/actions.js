@@ -3,9 +3,9 @@ import * as RoomApi from '../../../shared/api/room'
 export const RECEIVE_ROOM = 'RECEIVE_ROOM'
 export const RECEIVE_ERRORS = 'RECEIVE_ERRORS'
 
-const receiveRoom = currentUser => ({
+const receiveRoom = room => ({
   type: RECEIVE_ROOM,
-  currentUser
+  room
 })
 
 const receiveErrors = errors => ({
