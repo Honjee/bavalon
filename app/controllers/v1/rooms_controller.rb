@@ -30,6 +30,6 @@ class V1::RoomsController < ApplicationController
   private
 
   def room_params
-    params.require(:room).permit(:pin, :hasMordred, :hasOberon, :hasPercival, :current_mission, :players)
+    params.require(:room).permit(:owner_id, :hasMordred, :hasOberon, :hasPercival, :current_mission, :players)
   end
 end
