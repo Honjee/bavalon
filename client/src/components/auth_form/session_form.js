@@ -67,7 +67,7 @@ class SessionForm extends React.Component {
     return(
       <div className='auth-container'>
         { auth_form }
-        <h2><Link to={ this.props.redirectPath } > { this.props.redirect }</Link></h2>
+        <h2><Link to={ this.props.redirectPath } > { `${this.props.redirect} instead` }</Link></h2>
       </div>
     )
   }

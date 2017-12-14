@@ -1,7 +1,71 @@
+@import url('https://fonts.googleapis.com/css?family=Spectral+SC');
+html, body, div, span, h1, h2, h3, h4, h5, h6, p,
+a, img, strong, dl, dt, dd, ol, ul, li, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+  letter-spacing: 1px;
+  outline: none;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+}
+
+*:focus {
+  outline: none;
+}
+
+input[type='submit'] {
+  background: none;
+  -webkit-apperance: none;
+  margin-top: 2vh;
+  height: 7vh;
+  width: 80%;
+  background-color: rgb(66, 108, 255);
+  font-size: 24px;
+}
+
+input {
+  font-family: inherit;
+  letter-spacing: 0.5vh;
+}
+
 .app-container {
+  font-family: 'Spectral SC', serif;
+  font-size: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100vw;
   height: 100vh;
+  max-width: 600px;
+  max-height: 1000px;
+  letter-spacing: 0.5vh;
+}
+
+h1 {
+  font-size: 40px;
+}
+
+h2 {
+  padding: 30px;
 }
