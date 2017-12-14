@@ -16,9 +16,9 @@ const updateRoom = (room) => {
   })
 }
 
-const getRoom = (roomId) => {
+const getRoom = (roomName) => {
   return $.ajax({
-    url: `/v1/rooms/${roomId}`,
+    url: `/v1/rooms/${roomName}`,
     method: 'GET'
   })
 }
