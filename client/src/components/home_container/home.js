@@ -21,6 +21,11 @@ class Home extends React.Component {
     this.joinRoom = this.joinRoom.bind(this)
   }
 
+  componentWillMount() {
+    const { session, history } = this.props
+    this.props.ensureLoggedIn(session, history)
+  }
+
   updateField(e) {
     this.setState({ room: e.target.value })
   }
@@ -104,7 +109,9 @@ class Home extends React.Component {
 }
 
 Home.propTypes = {
-  history: PropTypes.object
+  history: PropTypes.object,
+  ensureLoggedIn: PropTypes.func,
+  session: PropTypes.object
 }
 
 export default Home

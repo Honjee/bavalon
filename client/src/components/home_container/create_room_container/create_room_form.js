@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom'
 import Style from './style.css'
 
 import C from '../../../shared/constants'
-import { ensureLoggedIn } from '../../../shared/util/on_enter'
-
 const { M, V, MAPPING } = C
 
 class CreateRoomForm extends React.Component {
@@ -14,10 +12,6 @@ class CreateRoomForm extends React.Component {
     this.state={ [M.hasMordred]: false, [M.hasOberon]: false, [V.hasPercival]: true }
     this.checkCharacter = this.checkCharacter.bind(this)
     this.roomSubmit = this.roomSubmit.bind(this)
-  }
-
-  componentWillMount() {
-    ensureLoggedIn(this.props.session, this.props.history)
   }
 
   checkCharacter(char) {
@@ -77,7 +71,6 @@ CreateRoomForm.propTypes = {
   createRoom: PropTypes.func,
   history: PropTypes.object,
   userId: PropTypes.number,
-  session: PropTypes.object
 }
 
 export default CreateRoomForm
