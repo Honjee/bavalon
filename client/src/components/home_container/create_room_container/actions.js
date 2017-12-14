@@ -1,7 +1,7 @@
 import * as RoomApi from '../../../shared/api/room'
 
 export const RECEIVE_ROOM = 'RECEIVE_ROOM'
-export const RECEIVE_ERRORS = 'RECEIVE_ERRORS'
+export const RECEIVE_ROOM_ERROR = 'RECEIVE_ROOM_ERROR'
 
 const receiveRoom = room => ({
   type: RECEIVE_ROOM,
@@ -9,7 +9,7 @@ const receiveRoom = room => ({
 })
 
 const receiveErrors = errors => ({
-  type: RECEIVE_ERRORS,
+  type: RECEIVE_ROOM_ERROR,
   errors
 })
 
@@ -22,9 +22,9 @@ export const createRoom = room => dispatch => (
   )
 )
 
-export const getRoom = room => dispatch => (
-  RoomApi.getRoom(room).then(
-    currentUser => dispatch(receiveRoom(currentUser)),
+export const getRoom = roomName => dispatch => (
+  RoomApi.getRoom(roomName).then(
+    room => dispatch(receiveRoom(room)),
     errors => dispatch(receiveErrors(errors))
   )
 )

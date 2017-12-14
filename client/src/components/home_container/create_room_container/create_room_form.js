@@ -35,7 +35,7 @@ class CreateRoomForm extends React.Component {
   }
 
   linkToRoom(roomId) {
-    this.props.history.replace(`/rooms/${roomId}`)
+    this.props.history.replace(`/room/${roomId}`)
   }
 
   roomSubmit() {
