@@ -1,6 +1,6 @@
 class V1::RoomsController < ApplicationController
   def show
-    @room = Room.find(params[:id])
+    @room = Room.find_by_name(params[:id])
   end
 
   def create
