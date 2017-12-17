@@ -28,9 +28,12 @@ module.exports = {
     filename: './app/assets/javascripts/components/bundle.js'
   },
   resolve: {
+    modules: [
+            "node_modules",
+        ],
     extensions: ['.js', '.jsx', '.ts', '.svg', '*']
   },
-  plugins: plugins,
+  plugins: ['lodash', ...plugins],
   module: {
     loaders: [
       {
@@ -38,7 +41,11 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         loader: 'babel-loader',
         query: {
-          presets: ['react', 'es2015']
+          plugins: ['lodash'],
+          presets: ['react', 'es2015', ['@babel/env', { 'targets': { 'node': 6 } }],
+          "presets": ["react-app", {
+            "isUsingLodash": true
+          }]]
         }
       },
 
