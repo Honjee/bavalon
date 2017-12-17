@@ -8,7 +8,7 @@ import { ensureLoggedIn } from '../../shared/util/on_enter'
 const mapStateToProps = (state, ownProps) => {
   const roomName = ownProps.match.params.roomId
   const room = state.getIn(['room'])
-  const invalidRoom = !room || !room.id
+  const invalidRoom = Boolean(!room || !room.id)
 
   return {
     roomName,

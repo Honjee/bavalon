@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import Style from './style.css'
+import includes from 'lodash/includes'
 
 import { redirectLoggedIn } from '../../shared/util/on_enter'
 
@@ -13,6 +14,7 @@ const CREDENTIALS = {
 class SessionForm extends React.Component {
   constructor(props) {
     super(props)
+    window.includes = includes
     this.setState = this.setState.bind(this)
     this.processForm = this.processForm.bind(this)
   }
@@ -42,7 +44,9 @@ class SessionForm extends React.Component {
 
   processForm() {
     const { history, linkToLobby } = this.props
-    this.props.processForm(this.state).then(() => linkToLobby(history))
+    this.props.processForm(this.state).then(response => {
+      if(!includes(response.type, 'ERROR')) linkToLobby(history)}
+    )
   }
 
   getAuthForm() {

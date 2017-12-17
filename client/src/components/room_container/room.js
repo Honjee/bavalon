@@ -9,7 +9,7 @@ class Room extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchRoom(roomName)
+    this.props.fetchRoom(this.props.roomName)
   }
 
   invalidRoom() {
@@ -30,10 +30,10 @@ class Room extends React.Component {
 }
 
 Room.propTypes = {
-  roomName: PropTypes.number,
+  roomName: PropTypes.string,
   room: PropTypes.object,
   fetchRoom: PropTypes.func,
-  invalidRoom: PropTypes.boolean
+  invalidRoom: PropTypes.bool
 }
 
 export default Room
