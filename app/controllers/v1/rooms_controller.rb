@@ -1,11 +1,11 @@
 class V1::RoomsController < ApplicationController
   def show
-    @room = Room.find(params[:id])
+    @room = Room.find_by_name(params[:id])
   end
 
   def create
     @room = Room.new(room_params)
-    @room.name = Faker::Pokemon.name.downcase
+    @room.name = Faker::Color.color_name.downcase + Faker::Pokemon.name.downcase
     @room.owner_id = current_user.id if !@room.owner_id && current_user
 
     if @room.save
@@ -30,6 +30,6 @@ class V1::RoomsController < ApplicationController
   private
 
   def room_params
-    params.require(:room).permit(:pin, :hasMordred, :hasOberon, :hasPercival, :current_mission, :players)
+    params.require(:room).permit(:owner_id, :hasMordred, :hasOberon, :hasPercival, :current_mission, :players)
   end
 end

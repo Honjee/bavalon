@@ -35,15 +35,14 @@ class CreateRoomForm extends React.Component {
   }
 
   linkToRoom(roomId) {
-    this.props.history.replace(`/rooms/${roomId}`)
+    this.props.history.replace(`/room/${roomId}`)
   }
 
   roomSubmit() {
     const room = this.state
     room.owner_id = this.props.userId
-
-    this.props.createRoom(room).then((room) => {
-      this.linkToRoom(room.id)
+    this.props.createRoom(room).then(({room}) => {
+      this.linkToRoom(room.name)
     })
   }
 
