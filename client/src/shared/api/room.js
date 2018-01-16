@@ -1,7 +1,7 @@
-import $ from 'jquery'
+import { ajax } from 'jquery'
 
 const createRoom = (room) => {
-  return $.ajax({
+  return ajax({
     url: '/v1/rooms',
     data: { room },
     method: 'POST'
@@ -9,7 +9,7 @@ const createRoom = (room) => {
 }
 
 const updateRoom = (room) => {
-  return $.ajax({
+  return ajax({
     url: `/v1/rooms/${room.id}`,
     data: { room },
     method: 'PATCH'
@@ -17,7 +17,7 @@ const updateRoom = (room) => {
 }
 
 const getRoom = (roomName) => {
-  return $.ajax({
+  return ajax({
     url: `/v1/rooms/${roomName}`,
     method: 'GET'
   })
