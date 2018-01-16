@@ -2,22 +2,21 @@ import Room from './room'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import { createRoomPlayers, getRoomPlayers, updateRoomPlayers } from './actions'
+import { getRoomPlayers } from './actions'
 import { getRoom } from '../home_container/create_room_container/actions'
 import { ensureLoggedIn } from '../../shared/util/on_enter'
 import * as C from '../../shared/util/connection'
 
 const mapStateToProps = (state, ownProps) => {
   const roomName = ownProps.match.params.roomId
-  const room = state.getIn(['room'])
-  const players = state.getIn(['players'])
-  const invalidRoom = Boolean(!room || !room.id)
-  const createConnection = C.createConnection
+  const room = state.getIn(['room', 'room'])
+  const players = state.getIn(['players', 'room'])
+  const invalidRoom = Boolean(!room || !room.get('id'))
 
   return {
-    createConnection,
     roomName,
     room,
+    players,
     invalidRoom
   }
 }
@@ -25,10 +24,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     fetchRoom: room => dispatch(getRoom(room)),
-    fetchRoomPlayers: roomPlayers => dispatch,
-    createRoomPlayers: (room, players) => dispatch(createRoomPlayers(room, players)),
     getRoomPlayers: roomId => dispatch(getRoomPlayers(roomId)),
-    updateRoomPlayers: players => dispatch(updateRoomPlayers(players))
   }
 }
 

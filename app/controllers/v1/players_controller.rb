@@ -1,8 +1,9 @@
 require 'byebug'
 
 class V1::PlayersController < ApplicationController
-  def show
-    @player = Players.find_by_id(params[:id])
+  def index
+    @players = Player.find_by_room_id(params[:room_id])
+    render 'v1/players/show'
   end
 
   def create
@@ -18,9 +19,9 @@ class V1::PlayersController < ApplicationController
   end
 
   def update
-  end
-
-  def destroy
+    @players = Player.find(params[:id])
+    @players.update(player_params)
+    render 'v1/players/show'
   end
 
   private

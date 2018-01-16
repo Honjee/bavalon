@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import Style from './style.css'
 
+import Lobby from './lobby_container'
+
 class Room extends React.Component {
   constructor(props) {
     super(props)
@@ -10,8 +12,6 @@ class Room extends React.Component {
 
   componentDidMount() {
     this.props.fetchRoom(this.props.roomName)
-    this.props.getRoomPlayers(this.props.room.id)
-    this.props.createConnection('PlayersChannel')
   }
 
   invalidRoom() {
@@ -21,23 +21,25 @@ class Room extends React.Component {
     )
   }
 
-
-
   render() {
     if(this.props.invalidRoom) return this.invalidRoom()
+    const roomId = this.props.room.get('id')
     return(
       <div>
+        <Lobby roomId={ roomId } />
       </div>
     )
   }
 }
 
 Room.propTypes = {
-  createConnection: PropTypes.func,
+  players: PropTypes.object,
   roomName: PropTypes.string,
   room: PropTypes.object,
   fetchRoom: PropTypes.func,
-  invalidRoom: PropTypes.bool
+  fetchRoomPlayers: PropTypes.func,
+  invalidRoom: PropTypes.bool,
+  updateRoomPlayers: PropTypes.func
 }
 
 export default Room

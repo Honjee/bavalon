@@ -1,14 +1,13 @@
 import { ajax } from 'jquery'
 
-const createRoomPlayers = (roomId) => {
+const createRoomPlayers = roomId => {
   return ajax({
     url: `/v1/rooms/${roomId}/players`,
-    data: { roomId },
-    method: 'POST'
+    method: 'GET'
   })
 }
 
-const getRoomPlayers = ({ roomId }) => {
+const getRoomPlayers = roomId => {
   debugger
   return ajax({
     url: `/v1/rooms/${roomId}/players`,
@@ -16,7 +15,7 @@ const getRoomPlayers = ({ roomId }) => {
   })
 }
 
-const updateRoomPlayers = (players) => {
+const updateRoomPlayers = players => {
   return ajax({
     url: `/v1/rooms/${players.roomId}/players`,
     data: { players },

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     resources :rooms, only: [:create, :update]
 
     resources :rooms, only: [:show] do
-      resources :players, only: [:show, :create, :update]
+      resources :players, only: [:index, :show, :create, :update]
     end
   end
 
