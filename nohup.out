@@ -1,0 +1,12 @@
+50360:C 06 Jan 16:21:09.423 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+50360:C 06 Jan 16:21:09.424 # Redis version=4.0.6, bits=64, commit=00000000, modified=0, pid=50360, just started
+50360:C 06 Jan 16:21:09.424 # Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf
+50360:M 06 Jan 16:21:09.425 * Increased maximum number of open files to 10032 (it was originally set to 4864).
+50360:M 06 Jan 16:21:09.428 * Running mode=standalone, port=6379.
+50360:M 06 Jan 16:21:09.428 # Server initialized
+50360:M 06 Jan 16:21:09.429 * Ready to accept connections
+50360:signal-handler (1515273699) Received SIGTERM scheduling shutdown...
+50360:M 06 Jan 16:21:39.555 # User requested shutdown...
+50360:M 06 Jan 16:21:39.567 * Saving the final RDB snapshot before exiting.
+50360:M 06 Jan 16:21:39.770 * DB saved on disk
+50360:M 06 Jan 16:21:39.770 # Redis is now ready to exit, bye bye...

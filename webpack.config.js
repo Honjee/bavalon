@@ -23,7 +23,7 @@ plugins = plugins.concat(
 
 module.exports = {
   context: __dirname,
-  entry: './frontend/avalon',
+  entry: './client/avalon',
   output: {
     filename: './app/assets/javascripts/components/bundle.js'
   },
@@ -42,13 +42,9 @@ module.exports = {
         loader: 'babel-loader',
         query: {
           plugins: ['lodash'],
-          presets: ['react', 'es2015', ['@babel/env', { 'targets': { 'node': 6 } }],
-          "presets": ["react-app", {
-            "isUsingLodash": true
-          }]]
+          presets: ['react', 'es2015', ['@babel/env', { 'targets': { 'node': 6 } }]]
         }
-      },
-
+      }
     ]
   },
 
