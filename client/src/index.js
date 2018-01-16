@@ -5,7 +5,6 @@ import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 import configureStore from './store'
 import includes from 'lodash/includes'
-
 window.includes = includes
 
 const setupStore = () => {
