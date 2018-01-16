@@ -10,6 +10,8 @@ class Room extends React.Component {
 
   componentDidMount() {
     this.props.fetchRoom(this.props.roomName)
+    this.props.getRoomPlayers(this.props.room.id)
+    this.props.createConnection('PlayersChannel')
   }
 
   invalidRoom() {
@@ -19,9 +21,10 @@ class Room extends React.Component {
     )
   }
 
+
+
   render() {
     if(this.props.invalidRoom) return this.invalidRoom()
-
     return(
       <div>
       </div>
@@ -30,6 +33,7 @@ class Room extends React.Component {
 }
 
 Room.propTypes = {
+  createConnection: PropTypes.func,
   roomName: PropTypes.string,
   room: PropTypes.object,
   fetchRoom: PropTypes.func,
