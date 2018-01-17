@@ -9,15 +9,24 @@ class Lobby extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getRoomPlayers(this.props.roomId).then(d => {
+    const userName = this.props.userName || "roycekim"
+    this.props.getRoomPlayers(this.props.roomId).then(
+      ({ players }) => this.props.updateRoomPlayers(players, userName)
+    )
+    this.props.createConnection('PlayersChannel')
+  }
+
+  renderPlayers() {
+    const players = (this.props.players  && this.props.players.getIn(['players'])) || []
+    players.map(p => {
       debugger
     })
-    this.props.createConnection('PlayersChannel')
   }
 
   render() {
     return(
       <div>
+        { this.renderPlayers() }
       </div>
     )
   }
@@ -27,7 +36,8 @@ Lobby.propTypes = {
   createConnection: PropTypes.func,
   getRoomPlayers: PropTypes.func,
   roomId: PropTypes.number,
-  updateRoomPlayers: PropTypes.func
+  updateRoomPlayers: PropTypes.func,
+  userName: PropTypes.string
 }
 
 export default Lobby

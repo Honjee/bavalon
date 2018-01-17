@@ -9,7 +9,7 @@
 #
 
 class Player < ApplicationRecord
-  validates :owner_id, :players, :room_id, presence: true
+  validates :owner_id, :room_id, presence: true
   validates :room_id, :uniqueness => { scope: :owner_id }
 
   belongs_to :room,

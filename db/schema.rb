@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180115225113) do
+ActiveRecord::Schema.define(version: 20180117030050) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20180115225113) do
   create_table "players", force: :cascade do |t|
     t.integer "owner_id", null: false
     t.string "room_id", null: false
-    t.integer "players", default: [], array: true
+    t.text "players", default: ""
     t.index ["owner_id", "room_id"], name: "index_players_on_owner_id_and_room_id", unique: true
   end
 

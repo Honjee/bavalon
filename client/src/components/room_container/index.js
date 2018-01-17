@@ -2,7 +2,6 @@ import Room from './room'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import { getRoomPlayers } from './actions'
 import { getRoom } from '../home_container/create_room_container/actions'
 import { ensureLoggedIn } from '../../shared/util/on_enter'
 import * as C from '../../shared/util/connection'
@@ -23,8 +22,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    fetchRoom: room => dispatch(getRoom(room)),
-    getRoomPlayers: roomId => dispatch(getRoomPlayers(roomId)),
+    fetchRoom: room => dispatch(getRoom(room))
   }
 }
 

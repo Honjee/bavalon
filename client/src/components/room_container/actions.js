@@ -29,8 +29,8 @@ export const getRoomPlayers = roomId => dispatch => (
   )
 )
 
-export const updateRoomPlayers = players => dispatch => (
-  PlayersApi.updateRoomPlayers(players).then(
+export const updateRoomPlayers = (players, playerName) => dispatch => (
+  PlayersApi.updateRoomPlayers(players, playerName).then(
     players => dispatch(receivePlayers(players)),
     errors => dispatch(receiveErrors(errors))
   )

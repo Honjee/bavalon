@@ -37,7 +37,6 @@ Room.propTypes = {
   roomName: PropTypes.string,
   room: PropTypes.object,
   fetchRoom: PropTypes.func,
-  fetchRoomPlayers: PropTypes.func,
   invalidRoom: PropTypes.bool,
   updateRoomPlayers: PropTypes.func
 }
