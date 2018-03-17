@@ -8,8 +8,8 @@ class V1::PlayersController < ApplicationController
 
   def create
     @players = Player.new()
-    @players.room_id = params[:room_id]
-    @players.owner_id = Room.find(params[:room_id]).owner_id
+    @players.room = Room.find(params[:room_id])
+    @players.owner_id = @players.room.owner_id
     @players.players = ''
     if @players.save
       render 'v1/players/show'
@@ -22,6 +22,14 @@ class V1::PlayersController < ApplicationController
     @players = Player.find(params[:id])
     updated_players = @players.players.split(',').push(params[:playername]).uniq.join(',')
     @players.players = updated_players
+    @players.save
+
+
+    RoomChannel.broadcast_to(
+      current_user,
+      players: @players.players
+    )
+
     render 'v1/players/show'
   end
 
