@@ -10,10 +10,11 @@ class Lobby extends React.Component {
 
   componentDidMount() {
     const userName = this.props.userName || "roycekim"
-    this.props.getRoomPlayers(this.props.roomId).then(
+    const roomId = this.props.roomId
+    this.props.getRoomPlayers(roomId).then(
       ({ players }) => this.props.updateRoomPlayers(players, userName)
     )
-    this.props.createConnection('PlayersChannel')
+    this.props.createConnection('RoomChannel', roomId)
   }
 
   renderPlayers() {
@@ -37,7 +38,7 @@ class Lobby extends React.Component {
 Lobby.propTypes = {
   createConnection: PropTypes.func,
   getRoomPlayers: PropTypes.func,
-  roomId: PropTypes.number,
+  room: PropTypes.string,
   updateRoomPlayers: PropTypes.func,
   userName: PropTypes.string
 }
