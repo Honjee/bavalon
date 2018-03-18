@@ -20,7 +20,7 @@ class Lobby extends React.Component {
   renderPlayers() {
     const players = (this.props.players  && this.props.players.getIn(['players'])) || []
     return players.map(player => {
-      return <li id={ player }>{ player }</li>
+      return <li key={ player.id }>{ player }</li>
     })
   }
 
