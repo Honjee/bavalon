@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 # used for action cables
-gem "redis", "~> 3.0" 
+gem "redis", "~> 3.0"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
@@ -27,7 +27,7 @@ gem 'faker'
 # gem 'capistrano-rails', group: :development
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem 'rack-cors'
+gem 'rack-cors'
 
 group :development, :test do
   gem 'annotate'
