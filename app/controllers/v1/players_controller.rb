@@ -24,9 +24,10 @@ class V1::PlayersController < ApplicationController
     @players.players = updated_players
     @players.save
 
-
-    RoomChannel.broadcast_to(
-      current_user,
+    # when a player leaves/joins a room send a broadcast
+    ActionCable.server.broadcast(
+      "room_#{@players.room.id}",
+      roomId: @players.room.id,
       players: @players.players
     )
 
