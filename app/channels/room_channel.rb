@@ -2,15 +2,14 @@ require 'byebug'
 
 class RoomChannel < ApplicationCable::Channel
   def subscribed
-    room = Room.find(params[:roomId])
-    # stream_from "some_channel"
     debugger
-    stream_for room
+    # stream_from "some_channel"
+    stream_from "room_#{params[:roomId]}"
   end
 
   def receive(data)
-    debugger
-    ActionCable.server.broadcast(room, data)
+    # this.send(data)
+    ActionCable.server.broadcast("room_#{data.roomId}", data)
   end
 
   def updatePlayers
