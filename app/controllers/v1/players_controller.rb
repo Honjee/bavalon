@@ -20,7 +20,12 @@ class V1::PlayersController < ApplicationController
 
   def update
     @players = Player.find(params[:id])
-    updated_players = @players.players.split(',').push(params[:playername]).uniq.join(',')
+    if params[:status] == 'JOIN'
+      updated_players = @players.players.split(',').push(params[:playername]).uniq.join(',')
+    elsif params[:status] == 'REMOVE'
+      updated_players = @players.players.split(',').dup.delete(params[:playername])
+    end
+
     @players.players = updated_players
     @players.save
 

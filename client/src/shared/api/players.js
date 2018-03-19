@@ -14,9 +14,9 @@ const getRoomPlayers = roomId => {
   })
 }
 
-const updateRoomPlayers = (players, playerName) => {
+const updateRoomPlayers = (players, playerName, method) => {
   return ajax({
-    url: `/v1/rooms/${players.room_id}/players/${players.id}?playername=${playerName}`,
+    url: `/v1/rooms/${players.room_id}/players/${players.id}?playername=${playerName}&status=${method}`,
     data: { players },
     method: 'PATCH'
   })

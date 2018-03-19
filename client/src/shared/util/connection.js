@@ -16,4 +16,6 @@ export const createConnection = (channel, roomId) => {
       }
     }
   )
+
+  return App
 }

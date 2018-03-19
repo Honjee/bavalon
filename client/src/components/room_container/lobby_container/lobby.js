@@ -3,6 +3,9 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import Style from './style.css'
 
+const JOIN = 'JOIN'
+const REMOVE = 'REMOVE'
+
 class Lobby extends React.Component {
   constructor(props) {
     super(props)
@@ -12,9 +15,16 @@ class Lobby extends React.Component {
     const userName = this.props.userName || "roycekim"
     const roomId = this.props.roomId
     this.props.getRoomPlayers(roomId).then(
-      ({ players }) => this.props.updateRoomPlayers(players, userName)
+      ({ players }) => this.props.updateRoomPlayers(players, userName, JOIN)
     )
-    this.props.createConnection('RoomChannel', roomId)
+    this.App = this.props.createConnection('RoomChannel', roomId)
+  }
+
+  componentWillUnMount() {
+    const players = this.props.players
+    const userName = this.props.userName || "roycekim"
+    this.props.updateRoomPlayers(players, userName, REMOVE)
+    this.App.cable.disconnect()
   }
 
   renderPlayers() {
@@ -40,7 +50,8 @@ Lobby.propTypes = {
   getRoomPlayers: PropTypes.func,
   room: PropTypes.string,
   updateRoomPlayers: PropTypes.func,
-  userName: PropTypes.string
+  userName: PropTypes.string,
+  players: PropTypes.object
 }
 
 export default Lobby
