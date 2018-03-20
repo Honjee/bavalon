@@ -2,7 +2,6 @@ require 'byebug'
 
 class RoomChannel < ApplicationCable::Channel
   def subscribed
-    debugger
     # stream_from "some_channel"
     stream_from "room_#{params[:roomId]}"
   end
@@ -19,7 +18,6 @@ class RoomChannel < ApplicationCable::Channel
   end
 
   def unsubscribed
-    debugger
     # Any cleanup needed when channel is unsubscribed
   end
 end
