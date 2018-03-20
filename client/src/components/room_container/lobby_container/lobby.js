@@ -5,6 +5,7 @@ import Style from './style.css'
 
 const JOIN = 'JOIN'
 const REMOVE = 'REMOVE'
+const ROOMCHANNEL = 'RoomChannel'
 
 class Lobby extends React.Component {
   constructor(props) {
@@ -17,7 +18,10 @@ class Lobby extends React.Component {
     this.props.getRoomPlayers(roomId).then(
       ({ players }) => this.props.updateRoomPlayers(players, userName, JOIN)
     )
-    this.App = this.props.createConnection('RoomChannel', roomId)
+    
+    this.App = this.props.createConsumer( ROOMCHANNEL, roomId, {
+      received: this.received.bind(this)
+    })
   }
 
   componentWillUnMount() {
@@ -25,6 +29,11 @@ class Lobby extends React.Component {
     const userName = this.props.userName || "roycekim"
     this.props.updateRoomPlayers(players, userName, REMOVE)
     this.App.cable.disconnect()
+  }
+
+  received (data) {
+    debugger
+    this.props.updateStorePlayers(data.players)
   }
 
   renderPlayers() {
@@ -46,12 +55,13 @@ class Lobby extends React.Component {
 }
 
 Lobby.propTypes = {
-  createConnection: PropTypes.func,
+  createConsumer: PropTypes.func,
   getRoomPlayers: PropTypes.func,
   room: PropTypes.string,
   updateRoomPlayers: PropTypes.func,
   userName: PropTypes.string,
-  players: PropTypes.object
+  players: PropTypes.object,
+  updateStorePlayers: PropTypes.func // adds players to store
 }
 
 export default Lobby

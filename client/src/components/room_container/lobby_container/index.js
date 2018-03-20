@@ -4,18 +4,18 @@ import { withRouter } from 'react-router-dom'
 
 import * as C from '../../../shared/util/connection'
 
-import { getRoomPlayers, updateRoomPlayers } from '../actions'
+import { getRoomPlayers, updateRoomPlayers, updateStorePlayers } from '../actions'
 
 const mapStateToProps = (state, ownProps) => {
   const players = state.getIn(['players', 'players'])
-  const createConnection = C.createConnection
+  const createConsumer = C.createConsumer
   const session = state.getIn(['session'])
   const [ ...keys ] = session.keys()
   const userId = parseInt(keys[0])
   const userName = session.getIn([keys[0], 'username'])
 
   return {
-    createConnection,
+    createConsumer,
     players,
     userName
   }
@@ -24,7 +24,8 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     getRoomPlayers: roomId => dispatch(getRoomPlayers(roomId)),
-    updateRoomPlayers: (players, playerName) => dispatch(updateRoomPlayers(players, playerName))
+    updateRoomPlayers: (players, playerName, status) => dispatch(updateRoomPlayers(players, playerName, status)),
+    updateStorePlayers: players => dispatch(updateStorePlayers(players))
   }
 }
 
