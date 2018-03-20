@@ -10,7 +10,7 @@ const PlayersReducer = (state = initialState, action) => {
   switch(action.type) {
     case RECEIVE_PLAYERS:
       const new_players = Object.assign({}, action.players)
-      new_players.players = new_players.players.split(',')
+      new_players.players = new_players.players ? new_players.players.split(',') : ""
       state = state.setIn(['players'], fromJS(new_players))
       break
     case RECEIVE_PLAYERS_ERRORS:
