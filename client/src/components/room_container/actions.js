@@ -29,9 +29,14 @@ export const getRoomPlayers = roomId => dispatch => (
   )
 )
 
-export const updateRoomPlayers = (players, playerName) => dispatch => (
-  PlayersApi.updateRoomPlayers(players, playerName).then(
+export const updateRoomPlayers = (players, playerName, status) => dispatch => (
+  PlayersApi.updateRoomPlayers(players, playerName, status).then(
     players => dispatch(receivePlayers(players)),
     errors => dispatch(receiveErrors(errors))
   )
 )
+
+// updates players store from websocket data
+export const updateStorePlayers = players => dispatch => {
+  players => dispatch(receivePlayers(players))
+}
