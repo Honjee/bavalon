@@ -12,8 +12,10 @@ const mapStateToProps = (state, ownProps) => {
   const session = state.getIn(['session'])
   const [ ...keys ] = session.keys()
   const userName = session.getIn([keys[0], 'username'])
-
+  const room = state.getIn(['room', 'room'])
+  
   return {
+    room,
     createConsumer,
     players,
     userName

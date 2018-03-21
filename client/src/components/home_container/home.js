@@ -10,7 +10,8 @@ import CreateRoomForm from './create_room_container'
 const TABS = {
   JOIN: 'join',
   CREATE: 'create',
-  EXPLAIN: 'explain' }
+  EXPLAIN: 'explain'
+}
 
 class Home extends React.Component {
   constructor(props, history) {
