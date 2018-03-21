@@ -6,10 +6,6 @@ import Style from './style.css'
 import Lobby from './lobby_container'
 
 class Room extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
   componentDidMount() {
     this.props.fetchRoom(this.props.roomName)
   }

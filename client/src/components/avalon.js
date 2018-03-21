@@ -1,12 +1,7 @@
 import './avalon.css'
 import React from 'react'
-import { Provider } from 'react-redux'
 import PropTypes from 'prop-types'
-import {
-  Route,
-  Switch,
-  HashRouter
-} from 'react-router-dom'
+import { Route } from 'react-router-dom'
 
 import AuthRoute from '../shared/util/route_util'
 import AuthForm from './auth_form'

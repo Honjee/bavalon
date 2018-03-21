@@ -4,12 +4,12 @@ import { signUp, logIn } from './actions'
 import { withRouter } from 'react-router-dom'
 
 const mapStateToProps = (state, ownProps, history) => {
-  const session = state.getIn(['session'])
   const loggedIn = state.currentUser ? true : false
   const redirect = ownProps.match.path === '/signup' ? "Log In" : "Sign Up"
   const redirectPath = ownProps.match.path === '/signup' ? '/login' : '/signup'
   const linkToLobby = (history) => history.replace('/lobby')
 
+  // const session = state.getIn(['session'])
   // const errors = state.get('errors.session')
   return {
     loggedIn,

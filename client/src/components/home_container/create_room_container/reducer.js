@@ -1,4 +1,4 @@
-import { Map, fromJS } from 'immutable'
+import { fromJS } from 'immutable'
 
 import { RECEIVE_ROOM, RECEIVE_ROOM_ERROR } from './actions'
 
@@ -14,6 +14,8 @@ const RoomReducer = (state = initialState, action) => {
     case RECEIVE_ROOM_ERROR:
       state = state.setIn(['error'], fromJS(action.error))
       break
+    default:
+
   }
 
   return state

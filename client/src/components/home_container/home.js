@@ -92,6 +92,7 @@ class Home extends React.Component {
         return this.getCreateRoomForm()
       case TABS.EXPLAIN:
         return this.getExplain()
+      default:
     }
   }
 

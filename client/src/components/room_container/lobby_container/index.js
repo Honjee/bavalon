@@ -11,7 +11,6 @@ const mapStateToProps = (state, ownProps) => {
   const createConsumer = C.createConsumer
   const session = state.getIn(['session'])
   const [ ...keys ] = session.keys()
-  const userId = parseInt(keys[0])
   const userName = session.getIn([keys[0], 'username'])
 
   return {

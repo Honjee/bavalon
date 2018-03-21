@@ -3,8 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 import { getRoom } from '../home_container/create_room_container/actions'
-import { ensureLoggedIn } from '../../shared/util/on_enter'
-import * as C from '../../shared/util/connection'
+// import { ensureLoggedIn } from '../../shared/util/on_enter'
 
 const mapStateToProps = (state, ownProps) => {
   const roomName = ownProps.match.params.roomId

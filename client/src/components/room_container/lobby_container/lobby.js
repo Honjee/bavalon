@@ -7,11 +7,8 @@ const JOIN = 'JOIN'
 const REMOVE = 'REMOVE'
 const ROOMCHANNEL = 'RoomChannel'
 
-class Lobby extends React.Component {
-  constructor(props) {
-    super(props)
-  }
 
+class Lobby extends React.Component {
   componentDidMount() {
     const userName = this.props.userName || "roycekim"
     const roomId = this.props.roomId
@@ -57,6 +54,7 @@ Lobby.propTypes = {
   createConsumer: PropTypes.func,
   getRoomPlayers: PropTypes.func,
   room: PropTypes.string,
+  roomId: PropTypes.number,
   updateRoomPlayers: PropTypes.func,
   userName: PropTypes.string,
   players: PropTypes.object,

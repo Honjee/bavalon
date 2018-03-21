@@ -7,7 +7,7 @@ import { createRoomPlayers } from '../../room_container/actions.js'
 const mapStateToProps = (state, ownProps) => {
   const session = state.getIn(['session'])
   const [ ...keys ] = session.keys()
-  const userId = parseInt(keys[0])
+  const userId = parseInt(keys[0], 10)
   return {
     userId,
     session
