@@ -7,7 +7,6 @@ const JOIN = 'JOIN'
 const REMOVE = 'REMOVE'
 const ROOMCHANNEL = 'RoomChannel'
 
-
 class Lobby extends React.Component {
   componentDidMount() {
     const userName = this.props.userName || "roycekim"
