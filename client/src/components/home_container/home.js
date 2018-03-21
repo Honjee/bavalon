@@ -32,7 +32,6 @@ class Home extends React.Component {
 
   joinRoom() {
     const room = this.state.room
-    debugger
     this.props.history.push(`room/${room}`)
   }
 

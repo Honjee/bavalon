@@ -37,6 +37,4 @@ export const updateRoomPlayers = (players, playerName, status) => dispatch => (
 )
 
 // updates players store from websocket data
-export const updateStorePlayers = players => dispatch => {
-  players => dispatch(receivePlayers(players))
-}
+export const updateStorePlayers = players => dispatch => dispatch(receivePlayers(players))

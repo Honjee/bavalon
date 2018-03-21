@@ -10,7 +10,6 @@ const SessionReducer = (state = initialState, action) => {
       state = fromJS(action.currentUser)
 
     case RECEIVE_ERRORS:
-      debugger
 
   }
 

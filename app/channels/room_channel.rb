@@ -12,9 +12,7 @@ class RoomChannel < ApplicationCable::Channel
   end
 
   def updatePlayers
-    debugger
-    ActionCable.server.broadcast("players_channel",
-    :players => data['players'])
+    ActionCable.server.broadcast("players_channel", :players => data['players'])
   end
 
   def unsubscribed

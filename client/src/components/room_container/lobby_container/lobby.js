@@ -18,7 +18,7 @@ class Lobby extends React.Component {
     this.props.getRoomPlayers(roomId).then(
       ({ players }) => this.props.updateRoomPlayers(players, userName, JOIN)
     )
-    
+
     this.App = this.props.createConsumer( ROOMCHANNEL, roomId, {
       received: this.received.bind(this)
     })
@@ -32,8 +32,7 @@ class Lobby extends React.Component {
   }
 
   received (data) {
-    debugger
-    this.props.updateStorePlayers(data.players)
+    this.props.updateStorePlayers(data)
   }
 
   renderPlayers() {
