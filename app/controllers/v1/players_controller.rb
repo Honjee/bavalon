@@ -24,25 +24,32 @@ class V1::PlayersController < ApplicationController
     previous_players = @players.players || ""
 
     if params[:status] == 'JOIN'
+      updated_players = previous_players.split(',')
+      return render json: [error: 'Room is full'], status: 422 if updated_players.count > 10
       updated_players = previous_players.split(',').push(params[:playername]).uniq.join(',')
     elsif params[:status] == 'REMOVE'
       updated_players = previous_players.split(',').dup.delete(params[:playername])
     end
 
     @players.players = updated_players
-    @players.save
+    if @players.save
+      broadcast_players @players
+      render 'v1/players/show'
+    else
+      render json: @players.errors.full_messages, status: 422
+    end
+  end
 
+  private
+
+  def broadcast_players players
     # when a player leaves/joins a room send a broadcast
     ActionCable.server.broadcast(
       "room_#{@players.room.id}",
       roomId: @players.room.id,
       players: @players.players
     )
-
-    render 'v1/players/show'
   end
-
-  private
 
   def player_params
     params.require(:players).permit(:room_id, :players, :owner_id, :playerName)
