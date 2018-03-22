@@ -39,9 +39,16 @@ class Lobby extends React.Component {
 
   renderPlayers() {
     const players = (this.props.players  && this.props.players.getIn(['players'])) || []
-    return players.map(player => {
-      return <li className='players' key={ player.id }>{ player }</li>
-    })
+    return (
+      <ul className='players-container'>
+        <h2>{ "Current Players: " }</h2>
+        {
+          players.map(player => {
+            return <li className='players' key={ player.id }>{ player }</li>
+          })
+        }
+      </ul>
+    )
   }
 
   updateOption(option) {
@@ -55,6 +62,7 @@ class Lobby extends React.Component {
   renderToggles() {
     let checked
     return <ul className='option-toggle'>
+      <h2>{ "Set game options:" }</h2>
       { OPTIONS.map(option => {
         checked = this.state.room[option]
         return <li className='option-item' key={ option }>
@@ -74,19 +82,19 @@ class Lobby extends React.Component {
     const roomName = room.get('name')
     return <div className='lobby-header'>
       <h1>{roomName}</h1>
+      <h3>{ 'lobby' }</h3>
     </div>
   }
 
   render() {
     const header = this.renderHeader()
     const toggles = this.renderToggles()
+    const players = this.renderPlayers()
     return(
       <div>
         { header }
+        { players }
         { toggles }
-        <ul className='players-container'>
-          { this.renderPlayers() }
-        </ul>
       </div>
     )
   }
