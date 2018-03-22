@@ -5,6 +5,8 @@ import { withRouter } from 'react-router-dom'
 import * as C from '../../../shared/util/connection'
 
 import { getRoomPlayers, updateRoomPlayers, updateStorePlayers } from '../actions'
+import { hasMordred, hasOberon } from '../../../shared/constants/minions'
+import { hasPercival } from '../../../shared/constants/villagers'
 
 const mapStateToProps = (state, ownProps) => {
   const players = state.getIn(['players', 'players'])
@@ -13,12 +15,14 @@ const mapStateToProps = (state, ownProps) => {
   const [ ...keys ] = session.keys()
   const userName = session.getIn([keys[0], 'username'])
   const room = state.getIn(['room', 'room'])
-  
+  const OPTIONS = [hasMordred, hasOberon, hasPercival]
+
   return {
     room,
     createConsumer,
     players,
-    userName
+    userName,
+    OPTIONS
   }
 }
 

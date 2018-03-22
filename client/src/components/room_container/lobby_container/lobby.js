@@ -6,7 +6,6 @@ import Style from './style.css'
 const JOIN = 'JOIN'
 const REMOVE = 'REMOVE'
 const ROOMCHANNEL = 'RoomChannel'
-const OPTIONS = ['hasMordred', 'hasPercival', 'hasOberon']
 
 class Lobby extends React.Component {
   constructor(props) {
@@ -40,14 +39,17 @@ class Lobby extends React.Component {
   renderPlayers() {
     const players = (this.props.players  && this.props.players.getIn(['players'])) || []
     return (
-      <ul className='players-container'>
+      <div className='players-container'>
         <h2>{ "Current Players: " }</h2>
-        {
-          players.map(player => {
-            return <li className='players' key={ player.id }>{ player }</li>
-          })
-        }
-      </ul>
+        <ul>
+          {
+            players.map(player => {
+              return <li className='players' key={ player.id }>{ player }</li>
+            })
+          }
+        </ul>
+        <div className='bottom-bar'/>
+      </div>
     )
   }
 
@@ -63,13 +65,13 @@ class Lobby extends React.Component {
     let checked
     return <ul className='option-toggle'>
       <h2>{ "Set game options:" }</h2>
-      { OPTIONS.map(option => {
+      { this.props.OPTIONS.map(option => {
         checked = this.state.room[option]
         return <li className='option-item' key={ option }>
           { option }
           <input
             type='checkbox'
-            onClick={ this.updateOption(option) }
+            onChange={ this.updateOption(option) }
             checked={ checked }
             />
         </li>
@@ -81,20 +83,31 @@ class Lobby extends React.Component {
     const room = this.props.room
     const roomName = room.get('name')
     return <div className='lobby-header'>
-      <h1>{roomName}</h1>
+      <h1>{ roomName }</h1>
       <h3>{ 'lobby' }</h3>
     </div>
+  }
+
+  renderStartButton() {
+    return <input
+            className='button-start-game'
+            type='button'
+            value='Start Game'
+            />
   }
 
   render() {
     const header = this.renderHeader()
     const toggles = this.renderToggles()
     const players = this.renderPlayers()
+    const startButton = this.renderStartButton()
+
     return(
-      <div>
+      <div className='lobby'>
         { header }
         { players }
         { toggles }
+        { startButton }
       </div>
     )
   }
@@ -108,6 +121,7 @@ Lobby.propTypes = {
   updateRoomPlayers: PropTypes.func,
   userName: PropTypes.string,
   players: PropTypes.object,
+  OPTIONS: PropTypes.array,
   updateStorePlayers: PropTypes.func // adds players to store
 }
 
