@@ -1,6 +1,6 @@
 .create-room-container {
     height: 80vh;
-    width: 100vw;
+    width: 100%;
     display: flex;
     text-align: center;
     flex-direction: column;
@@ -11,14 +11,10 @@ h3 {
     /* text-decoration: underline; */
 }
 
-
 .checkbox-wrapper {
     font-size: 4.5vh;
 }
 input[type="checkbox"]{
-    width: 4.5vh; 
-    height: 4.5vh;  
+    width: 4.5vh;
+    height: 4.5vh;
 }
-
-
-  
