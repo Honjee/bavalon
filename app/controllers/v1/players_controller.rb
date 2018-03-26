@@ -42,15 +42,6 @@ class V1::PlayersController < ApplicationController
 
   private
 
-  def broadcast_players players
-    # when a player leaves/joins a room send a broadcast
-    ActionCable.server.broadcast(
-      "room_#{@players.room.id}",
-      roomId: @players.room.id,
-      players: @players.players
-    )
-  end
-
   def player_params
     params.require(:players).permit(:room_id, :players, :owner_id, :playerName)
   end
