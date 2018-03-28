@@ -24,7 +24,7 @@ export const createRoomPlayers = (room, players) => dispatch => (
 
 export const getRoomPlayers = roomId => dispatch => (
   PlayersApi.getRoomPlayers(roomId).then(
-    players => dispatch(receivePlayers(players)),
+    room => dispatch(receivePlayers(room)),
     errors => dispatch(receiveErrors(errors))
   )
 )
