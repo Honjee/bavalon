@@ -8,13 +8,11 @@ import { getRoom } from '../home_container/create_room_container/actions'
 const mapStateToProps = (state, ownProps) => {
   const roomName = ownProps.match.params.roomId
   const room = state.getIn(['room', 'room'])
-  const players = state.getIn(['players', 'room'])
   const invalidRoom = Boolean(!room || !room.get('id'))
-
+  
   return {
     roomName,
     room,
-    players,
     invalidRoom
   }
 }
