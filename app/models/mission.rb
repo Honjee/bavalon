@@ -16,4 +16,5 @@ class Mission < ApplicationRecord
             :need_two_fails, presence: true
 
   belongs_to :room
+  has_many :votes 
 end
