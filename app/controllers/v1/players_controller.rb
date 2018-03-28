@@ -23,6 +23,8 @@ class V1::PlayersController < ApplicationController
     # base database cases of null players
     previous_players = @players.players || ""
 
+    return render json: [error: 'Room has started'], status: 422 if @players.room.started
+
     if params[:status] == 'JOIN'
       parsed_players = previous_players.split(',')
       return render json: [error: 'Room is full'], status: 422 if previous_players.length > 10
