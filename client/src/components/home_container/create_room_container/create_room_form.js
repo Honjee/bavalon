@@ -42,8 +42,9 @@ class CreateRoomForm extends React.Component {
     const room = this.state
     room.owner_id = this.props.userId
     this.props.createRoom(room).then(({room}) => {
-      this.props.createRoomPlayers(room.id)
-      this.linkToRoom(room.name)
+      this.props.createRoomPlayers(room.id).then(
+        () => this.linkToRoom(room.name)
+      )
     })
   }
 
