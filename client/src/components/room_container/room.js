@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import Style from './style.css'
 
 import Lobby from './lobby_container'
+import Game from './game_container'
 
 class Room extends React.Component {
   componentDidMount() {
@@ -13,6 +14,7 @@ class Room extends React.Component {
   invalidRoom() {
     return(
       <div className='empty-room'>
+        {'INVALID ROOM'}
       </div>
     )
   }
@@ -29,12 +31,10 @@ class Room extends React.Component {
 }
 
 Room.propTypes = {
-  players: PropTypes.object,
   roomName: PropTypes.string,
   room: PropTypes.object,
   fetchRoom: PropTypes.func,
-  invalidRoom: PropTypes.bool,
-  updateRoomPlayers: PropTypes.func
+  invalidRoom: PropTypes.bool
 }
 
 export default Room
