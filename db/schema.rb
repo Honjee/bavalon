@@ -10,16 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180117030050) do
+ActiveRecord::Schema.define(version: 20180326232344) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "missions", force: :cascade do |t|
+    t.integer "room_id", null: false
+    t.integer "round", null: false
+    t.integer "good_wins", default: 0, null: false
+    t.integer "bad_wins", default: 0, null: false
+  end
 
   create_table "players", force: :cascade do |t|
     t.integer "owner_id", null: false
     t.string "room_id", null: false
     t.text "players", default: ""
     t.index ["owner_id", "room_id"], name: "index_players_on_owner_id_and_room_id", unique: true
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "room_id", null: false
+    t.string "role", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "room_id"], name: "index_roles_on_user_id_and_room_id", unique: true
   end
 
   create_table "rooms", force: :cascade do |t|
