@@ -17,4 +17,6 @@
 class Room < ApplicationRecord
   validates :owner_id, :name, presence: true
   validates :name, uniqueness: true
+
+  has_many :missions
 end

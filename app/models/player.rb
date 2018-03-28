@@ -4,8 +4,8 @@
 #
 #  id       :integer          not null, primary key
 #  owner_id :integer          not null
-#  room_id  :integer          not null
-#  players  :integer          default([]), is an Array
+#  room_id  :string           not null
+#  players  :text             default("")
 #
 
 class Player < ApplicationRecord
