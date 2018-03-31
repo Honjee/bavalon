@@ -9,8 +9,10 @@ window.includes = includes
 
 const setupStore = () => {
   let store
-  store = window.currentUser ?
-            configureStore({ session: window.currentUser }) :
+  const currentUser = sessionStorage.getItem('session')
+  
+  store = currentUser ?
+            configureStore({ session: JSON.parse(currentUser) }) :
             configureStore()
 
   window.store = store
