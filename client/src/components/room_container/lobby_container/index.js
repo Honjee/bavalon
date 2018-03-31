@@ -8,7 +8,7 @@ import { getRoomPlayers, updateRoomPlayers, updateStorePlayers } from '../action
 import { hasMordred, hasOberon } from '../../../shared/constants/minions'
 import { hasPercival } from '../../../shared/constants/villagers'
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   const players = state.getIn(['players', 'players'])
   const createConsumer = C.createConsumer
   const session = state.getIn(['session'])
@@ -26,7 +26,7 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     getRoomPlayers: roomId => dispatch(getRoomPlayers(roomId)),
     updateRoomPlayers: (players, playerName, status) => dispatch(updateRoomPlayers(players, playerName, status)),
