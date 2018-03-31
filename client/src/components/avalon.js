@@ -9,6 +9,7 @@ import HomeContainer from './home_container'
 import RoomContainer from './room_container'
 
 const Avalon = ({store, getState}) =>  {
+
   return (
     <div className='app-container'>
       <header>
@@ -17,7 +18,6 @@ const Avalon = ({store, getState}) =>  {
       <AuthRoute exact path='/signup' component={ AuthForm }/>
       <Route path='/lobby' component={ HomeContainer }/>
       <Route path='/room/:roomId' component={ RoomContainer }/>
-
     </div>
   )
 }
