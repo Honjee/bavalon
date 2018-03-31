@@ -14,7 +14,6 @@ class Room extends React.Component {
   invalidRoom() {
     return(
       <div className='empty-room'>
-        {'INVALID ROOM'}
       </div>
     )
   }

@@ -5,6 +5,8 @@ import { withRouter } from 'react-router-dom'
 import * as C from '../../../shared/util/connection'
 
 import { getRoomPlayers, updateRoomPlayers, updateStorePlayers } from '../actions'
+import { updateRoom } from '../../home_container/create_room_container/actions'
+
 import { hasMordred, hasOberon } from '../../../shared/constants/minions'
 import { hasPercival } from '../../../shared/constants/villagers'
 
@@ -30,7 +32,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getRoomPlayers: roomId => dispatch(getRoomPlayers(roomId)),
     updateRoomPlayers: (players, playerName, status) => dispatch(updateRoomPlayers(players, playerName, status)),
-    updateStorePlayers: players => dispatch(updateStorePlayers(players))
+    updateStorePlayers: players => dispatch(updateStorePlayers(players)),
+    startRoomGame: room => dispatch(updateRoom(room))
   }
 }
 

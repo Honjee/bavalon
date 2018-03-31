@@ -11,6 +11,7 @@ class Lobby extends React.Component {
   constructor(props) {
     super(props)
     this.state = { room: this.props.room.toJS() }
+    this.startGame = this.startGame.bind(this)
   }
 
   componentDidMount() {
@@ -88,11 +89,19 @@ class Lobby extends React.Component {
     </div>
   }
 
+  startGame() {
+    const room = this.props.room
+    room.started = true
+
+    this.props.startRoomGame(room)
+  }
+
   renderStartButton() {
     return <input
             className='button-start-game'
             type='button'
             value='Start Game'
+            onClick={ this.startGame }
             />
   }
 
@@ -121,6 +130,7 @@ Lobby.propTypes = {
   updateRoomPlayers: PropTypes.func,
   userName: PropTypes.string,
   players: PropTypes.object,
+  startRoomGame: PropTypes.func,
   OPTIONS: PropTypes.array,
   updateStorePlayers: PropTypes.func // adds players to store
 }
