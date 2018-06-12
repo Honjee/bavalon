@@ -29,8 +29,8 @@ export const getRoom = roomName => dispatch => (
   )
 )
 
-export const updateRoom = () => dispatch => (
-  RoomApi.updateRoom().then(
+export const updateRoom = room => dispatch => (
+  RoomApi.updateRoom(room).then(
     room => dispatch(receiveRoom(room)),
     errors => dispatch(receiveErrors(errors))
   )

@@ -19,4 +19,9 @@ class Room < ApplicationRecord
   validates :name, uniqueness: true
 
   has_many :missions
+
+  def is_playing?(player)
+    players = @room.players
+    players.split(',').include?(player)
+  end
 end

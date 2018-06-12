@@ -32,6 +32,6 @@ class V1::RoomsController < ApplicationController
   private
 
   def room_params
-    params.require(:room).permit(:owner_id, :hasMordred, :hasOberon, :hasPercival, :current_mission)
+    params.require(:room).permit(:owner_id, :hasMordred, :hasOberon, :hasPercival, :current_mission, :started)
   end
 end
