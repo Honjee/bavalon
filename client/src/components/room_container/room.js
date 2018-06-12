@@ -20,19 +20,25 @@ class Room extends React.Component {
 
   render() {
     if(this.props.invalidRoom) return this.invalidRoom()
-    const roomId = this.props.room.get('id')
+    const { roomId, roomName } = this.props
+    const MainScreen = this.props.gameStarted ?
+      <Game roomId={ roomId } roomName={ roomName } /> :
+      <Lobby roomId={ roomId } />
+
     return(
       <div>
-        <Lobby roomId={ roomId } />
+        { MainScreen }
       </div>
     )
   }
 }
 
 Room.propTypes = {
+  roomId: PropTypes.string,
   roomName: PropTypes.string,
   room: PropTypes.object,
   fetchRoom: PropTypes.func,
+  gameStarted: PropTypes.bool,
   invalidRoom: PropTypes.bool
 }
 

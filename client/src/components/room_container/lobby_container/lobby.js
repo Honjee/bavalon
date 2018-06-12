@@ -90,9 +90,9 @@ class Lobby extends React.Component {
   }
 
   startGame() {
-    const room = this.props.room
+    const room = this.state.room
     room.started = true
-
+    room.current_mission = 1
     this.props.startRoomGame(room)
   }
 

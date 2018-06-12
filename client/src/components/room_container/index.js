@@ -9,8 +9,12 @@ const mapStateToProps = (state, ownProps) => {
   const roomName = ownProps.match.params.roomId
   const room = state.getIn(['room', 'room'])
   const invalidRoom = Boolean(!room || !room.get('id'))
-  
+  const gameStarted = room.get('started')
+  const roomId = room.get('id')
+
   return {
+    gameStarted,
+    roomId,
     roomName,
     room,
     invalidRoom
