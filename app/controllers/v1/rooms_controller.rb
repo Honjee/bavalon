@@ -3,7 +3,6 @@ require 'byebug'
 class V1::RoomsController < ApplicationController
   def show
     @room = Room.find_by_name(params[:id])
-    debugger
   end
 
   def create
