@@ -10,10 +10,15 @@ const mapStateToProps = (state, ownProps) => {
   const [ ...keys ] = session.keys()
   const userName = session.getIn([keys[0], 'username'])
   const room = state.getIn(['room', 'room'])
+  const roomName = room.get('name')
+  const roomId = room.get('id')
+  const currentMission = room.get('current_mission')
 
   return {
+    currentMission,
     players,
     room,
+    roomId,
     roomName,
     userName
   }

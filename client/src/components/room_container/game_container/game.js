@@ -10,15 +10,23 @@ class Game extends React.Component {
 
   render() {
     return (
-      <div>{'GAMEHERE'}</div>
+      <div>
+        { this.props.roomName }
+        { this.props.currentMission }
+      </div>
+
     )
   }
 }
 
 Game.propTypes = {
+  currentMission: PropTypes.string,
   fetchRoom: PropTypes.func,
+  players: PropTypes.object,
   roomId: PropTypes.string,
   roomName: PropTypes.string,
-  room: PropTypes.object
+  room: PropTypes.object,
+  userName: PropTypes.userName
 }
+
 export default Game
