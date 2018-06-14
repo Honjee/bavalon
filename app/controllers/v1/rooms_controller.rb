@@ -19,6 +19,16 @@ class V1::RoomsController < ApplicationController
 
   def update
     @room = Room.find(params[:id])
+    was_started = @room.started
+
+    unless was_started
+      will_start = room_params.started
+      if will_start
+        check_num_players(@room.players) # Render error if not enough players
+        assign_roles
+      end
+    end
+
     @room.update(room_params)
     render 'v1/rooms/show'
   end
@@ -33,5 +43,15 @@ class V1::RoomsController < ApplicationController
 
   def room_params
     params.require(:room).permit(:owner_id, :hasMordred, :hasOberon, :hasPercival, :current_mission, :started)
+  end
+
+  def check_num_players(players)
+    if players.length < 5
+      render json: 'not enough players to start', status: 422
+    end
+  end
+
+  def assign_roles
+
   end
 end
