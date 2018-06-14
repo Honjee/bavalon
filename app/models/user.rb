@@ -33,6 +33,10 @@ class User < ApplicationRecord
     nil
   end
 
+  def self.find_by_username(username)
+    User.find_by_username(username)
+  end
+
   def password=(password)
     @password = password
     self.password_digest = BCrypt::Password.create(password)
