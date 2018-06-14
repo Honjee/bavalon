@@ -5,7 +5,9 @@ import PropTypes from 'prop-types'
 
 class Game extends React.Component {
   componentDidMount() {
-    this.props.fetchRoom(this.props.roomName)
+    this.props.fetchRoom(this.props.roomName).then(
+      () => this.props.getRoomPlayers(this.props.roomId)
+    )
   }
 
   render() {
@@ -20,13 +22,14 @@ class Game extends React.Component {
 }
 
 Game.propTypes = {
-  currentMission: PropTypes.string,
+  currentMission: PropTypes.number,
   fetchRoom: PropTypes.func,
+  getRoomPlayers: PropTypes.func,
   players: PropTypes.object,
-  roomId: PropTypes.string,
+  roomId: PropTypes.number,
   roomName: PropTypes.string,
   room: PropTypes.object,
-  userName: PropTypes.userName
+  userName: PropTypes.string
 }
 
 export default Game
