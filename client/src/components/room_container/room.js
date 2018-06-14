@@ -34,7 +34,7 @@ class Room extends React.Component {
 }
 
 Room.propTypes = {
-  roomId: PropTypes.string,
+  roomId: PropTypes.number,
   roomName: PropTypes.string,
   room: PropTypes.object,
   fetchRoom: PropTypes.func,
