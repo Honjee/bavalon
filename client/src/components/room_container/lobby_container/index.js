@@ -18,9 +18,13 @@ const mapStateToProps = (state) => {
   const userName = session.getIn([keys[0], 'username'])
   const room = state.getIn(['room', 'room'])
   const OPTIONS = [hasMordred, hasOberon, hasPercival]
+  const playerList = players.get('players')
+  const playerCount = playerList && playerList.size
+  const disableStart = !playerCount || playerCount < 5
 
   return {
     room,
+    disableStart,
     createConsumer,
     players,
     userName,

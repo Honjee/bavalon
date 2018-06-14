@@ -102,6 +102,7 @@ class Lobby extends React.Component {
             type='button'
             value='Start Game'
             onClick={ this.startGame }
+            disabled={ this.props.disableStart }
             />
   }
 
@@ -123,6 +124,7 @@ class Lobby extends React.Component {
 }
 
 Lobby.propTypes = {
+  disableStart: PropTypes.bool,
   createConsumer: PropTypes.func,
   getRoomPlayers: PropTypes.func,
   room: PropTypes.object,
