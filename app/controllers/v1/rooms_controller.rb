@@ -1,4 +1,5 @@
 require 'byebug'
+require 'set'
 
 class V1::RoomsController < ApplicationController
   def show
@@ -7,7 +8,9 @@ class V1::RoomsController < ApplicationController
 
   def create
     @room = Room.new(room_params)
-    @room.name = (Faker::Color.color_name.downcase + Faker::Pokemon.name.downcase).gsub(/\s+/, "")
+    @room.name = (
+      Faker::Color.color_name.downcase +
+      Faker::Pokemon.name.downcase).gsub(/\s+/, "")
     @room.owner_id = current_user.id if !@room.owner_id && current_user
 
     if @room.save
@@ -22,11 +25,8 @@ class V1::RoomsController < ApplicationController
     was_started = @room.started
 
     unless was_started
-      will_start = room_params.started
-      if will_start
-        check_num_players(@room.players) # Render error if not enough players
-        assign_roles
-      end
+      will_start = room_params['started'].downcase == 'true'
+      assign_roles(@room) if will_start
     end
 
     @room.update(room_params)
@@ -42,16 +42,44 @@ class V1::RoomsController < ApplicationController
   private
 
   def room_params
-    params.require(:room).permit(:owner_id, :hasMordred, :hasOberon, :hasPercival, :current_mission, :started)
+    params.require(:room).permit(
+      :id,
+      :name,
+      :owner_id,
+      :hasMordred,
+      :hasOberon,
+      :hasPercival,
+      :current_mission,
+      :started)
   end
 
-  def check_num_players(players)
+  def assign_roles(room)
+    debugger
+    players = room.players
     if players.length < 5
       render json: 'not enough players to start', status: 422
     end
+
+    roles = get_roles(room)
+    role_keys = roles.keys.shuffle
+
+    players.each do |player|
+      role = role_keys.pop()
+      Room.add_role(player.id, role, roles[role])
+    end
   end
 
-  def assign_roles
+  def get_roles(room)
 
+    roles = { 'MERLIN': 'good' }
+    roles['MORDRED'] = 'evil' if room.hasMordred
+    roles['OBERON'] = 'evil' if room.hasOberon
+    if room.hasPercival
+      roles['PERCIVAL'] = 'good'
+      roles['MORGANA'] = 'evil'
+    end
+    roles['ASSASSIN'] = 'evil'
+    roles['MORGANA'] = 'evil'
+    roles
   end
 end
