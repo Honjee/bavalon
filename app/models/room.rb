@@ -19,9 +19,30 @@ class Room < ApplicationRecord
   validates :name, uniqueness: true
 
   has_many :missions
+  has_many :roles
+  has_many :player
 
   def is_playing?(player)
     players = @room.players
     players.split(',').include?(player)
+  end
+
+  def assign_role(player_id, role, affinity)
+    debugger
+    role = Role.new({
+      user_id: player_id,
+      room_id: self.owner_id,
+      affinity: affinity
+      })
+
+    begin
+      role.save
+    rescue
+      return { json: @role.errors.full_messages, status: 422 }
+    end
+  end
+
+  def get_players()
+    self.player.players
   end
 end
