@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180328040113) do
+ActiveRecord::Schema.define(version: 20180815003730) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20180328040113) do
     t.datetime "updated_at", null: false
     t.integer "owner_id"
     t.string "name", null: false
-    t.boolean "started"
+    t.boolean "started", default: false
     t.index ["name"], name: "index_rooms_on_name"
   end
 
