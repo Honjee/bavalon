@@ -1,6 +1,3 @@
-require 'byebug'
-require 'set'
-
 class V1::RoomsController < ApplicationController
   def show
     @room = Room.find_by_name(params[:id])
