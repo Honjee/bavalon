@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 import { getRoom } from '../../home_container/create_room_container/actions'
+import { getRoomPlayers } from '../actions'
 
 const mapStateToProps = (state, ownProps) => {
   const players = state.getIn(['players', 'players'])
@@ -26,7 +27,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchRoom: room => dispatch(getRoom(room))
+    fetchRoom: room => dispatch(getRoom(room)),
+    getRoomPlayers: roomId => dispatch(getRoomPlayers(roomId))
   }
 }
 

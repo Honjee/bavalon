@@ -18,7 +18,9 @@ class Lobby extends React.Component {
     const userName = this.props.userName || "roycekim"
     const roomId = this.props.roomId
     this.props.getRoomPlayers(roomId).then(
-      ({ players }) => this.props.updateRoomPlayers(players, userName, JOIN)
+      ({ players }) => {
+        return this.props.updateRoomPlayers(players, userName, JOIN)
+      }
     )
 
     this.App = this.props.createConsumer( ROOMCHANNEL, roomId, {
@@ -38,14 +40,21 @@ class Lobby extends React.Component {
   }
 
   renderPlayers() {
-    const players = (this.props.players  && this.props.players.getIn(['players'])) || []
+    const players = (this.props.players  &&
+      this.props.players.getIn(['players'])) || []
+
     return (
       <div className='players-container'>
         <h2>{ "Current Players: " }</h2>
+
         <ul>
           {
-            players.map(player => {
-              return <li className='players' key={ player.id }>{ player }</li>
+            players.map((player, idx) => {
+              return <li
+                className={`players-${player.id}`}
+                key={ `${player.id} + ${idx}` }>
+                { player }
+              </li>
             })
           }
         </ul>
@@ -64,8 +73,10 @@ class Lobby extends React.Component {
 
   renderToggles() {
     let checked
+
     return <ul className='option-toggle'>
       <h2>{ "Set game options:" }</h2>
+
       { this.props.OPTIONS.map(option => {
         checked = this.state.room[option]
         return <li className='option-item' key={ option }>
@@ -77,6 +88,7 @@ class Lobby extends React.Component {
             />
         </li>
       }) }
+
     </ul>
   }
 
@@ -102,6 +114,7 @@ class Lobby extends React.Component {
             type='button'
             value='Start Game'
             onClick={ this.startGame }
+            disabled={ this.props.disableStart }
             />
   }
 
@@ -123,6 +136,7 @@ class Lobby extends React.Component {
 }
 
 Lobby.propTypes = {
+  disableStart: PropTypes.bool,
   createConsumer: PropTypes.func,
   getRoomPlayers: PropTypes.func,
   room: PropTypes.object,

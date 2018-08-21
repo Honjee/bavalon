@@ -8,10 +8,11 @@
 #  role       :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  affinity   :string           not null
 #
 
 class Role < ApplicationRecord
-  validates :user_id, :room_id, :role, presence: true
+  validates :user_id, :room_id, :role, :affinity, presence: true
 
   belongs_to :user
   belongs_to :room
