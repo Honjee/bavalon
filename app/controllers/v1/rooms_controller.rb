@@ -54,8 +54,7 @@ class V1::RoomsController < ApplicationController
   end
 
   def assign_roles(room)
-    debugger
-    players = room.players
+    players = room.get_players
     if players.length < 5
       render json: 'not enough players to start', status: 422
     end
@@ -64,8 +63,9 @@ class V1::RoomsController < ApplicationController
     role_keys = roles.keys.shuffle
 
     players.each do |player|
-      role = role_keys.pop()
-      Room.add_role(player.id, role, roles[role])
+      role = role_keys.pop() || :VILLAGER
+      affinity = roles[role] || :good
+      room.assign_role(player, role, affinity)
     end
   end
 

@@ -11,7 +11,7 @@
 #  updated_at      :datetime         not null
 #  owner_id        :integer
 #  name            :string           not null
-#  started         :boolean
+#  started         :boolean          default(FALSE)
 #
 
 class Room < ApplicationRecord
@@ -27,22 +27,18 @@ class Room < ApplicationRecord
     players.split(',').include?(player)
   end
 
-  def assign_role(player_id, role, affinity)
-    debugger
+  def assign_role(player_name, role_name, affinity)
+    player = User.find_by_username(player_name)
     role = Role.new({
-      user_id: player_id,
+      user_id: player.id,
       room_id: self.owner_id,
+      role: role_name,
       affinity: affinity
-      })
-
-    begin
-      role.save
-    rescue
-      return { json: @role.errors.full_messages, status: 422 }
-    end
+    })
+    role.save
   end
 
   def get_players()
-    self.player.players
+    self.player.first.players.split(',')
   end
 end
