@@ -31,7 +31,7 @@ class Room < ApplicationRecord
     player = User.find_by_username(player_name)
     role = Role.new({
       user_id: player.id,
-      room_id: self.owner_id,
+      room_id: self.id,
       role: role_name,
       affinity: affinity
     })

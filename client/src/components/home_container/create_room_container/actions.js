@@ -35,3 +35,4 @@ export const updateRoom = room => dispatch => (
     errors => dispatch(receiveErrors(errors))
   )
 )
+export const updateStoreRoom = room => dispatch => dispatch(receiveRoom(room))

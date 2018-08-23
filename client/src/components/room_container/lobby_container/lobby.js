@@ -36,7 +36,14 @@ class Lobby extends React.Component {
   }
 
   received (data) {
-    this.props.updateStorePlayers(data)
+    switch(data.type) {
+      case 'NEW_PLAYER':
+        this.props.updateStorePlayers(data)
+        break;
+      case 'ROOM_START':
+        this.props.updateStoreRoom(data.room)
+        break;
+    }
   }
 
   renderPlayers() {
@@ -146,7 +153,8 @@ Lobby.propTypes = {
   players: PropTypes.object,
   startRoomGame: PropTypes.func,
   OPTIONS: PropTypes.array,
-  updateStorePlayers: PropTypes.func // adds players to store
+  updateStorePlayers: PropTypes.func, // adds players to store
+  updateStoreRoom: PropTypes.func // pushes room start
 }
 
 export default Lobby
