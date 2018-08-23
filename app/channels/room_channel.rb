@@ -11,10 +11,6 @@ class RoomChannel < ApplicationCable::Channel
     ActionCable.server.broadcast("room_#{data.roomId}", data)
   end
 
-  def updatePlayers
-    ActionCable.server.broadcast("players_channel", :players => data['players'])
-  end
-
   def unsubscribed
     # Any cleanup needed when channel is unsubscribed
   end

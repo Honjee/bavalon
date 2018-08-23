@@ -50,7 +50,8 @@ class V1::PlayersController < ApplicationController
     ActionCable.server.broadcast(
       "room_#{@players.room.id}",
       roomId: @players.room.id,
-      players: @players.players
+      players: @players.players,
+      type: "NEW_PLAYER"
     )
   end
 

@@ -27,6 +27,7 @@ class V1::RoomsController < ApplicationController
     end
 
     @room.update(room_params)
+    broadcast_start_room
     render 'v1/rooms/show'
   end
 
@@ -50,6 +51,15 @@ class V1::RoomsController < ApplicationController
       :started)
   end
 
+  def broadcast_start_room
+    ActionCable.server.broadcast(
+      "room_#{@room.id}",
+      roomId: @room.id,
+      room: @room,
+      type: "ROOM_START"
+    )
+  end
+
   def assign_roles(room)
     players = room.get_players
     if players.length < 5
@@ -67,7 +77,6 @@ class V1::RoomsController < ApplicationController
   end
 
   def get_roles(room)
-
     roles = { 'MERLIN': 'good' }
     roles['MORDRED'] = 'evil' if room.hasMordred
     roles['OBERON'] = 'evil' if room.hasOberon
