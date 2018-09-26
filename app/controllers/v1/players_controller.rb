@@ -3,6 +3,8 @@ require 'byebug'
 class V1::PlayersController < ApplicationController
   def index
     @players = Player.find_by_room_id(params[:room_id])
+    @list = Player.get_mapped_players(@players.players_list)
+
     render 'v1/players/show'
   end
 
@@ -10,7 +12,9 @@ class V1::PlayersController < ApplicationController
     @players = Player.new()
     @players.room = Room.find(params[:room_id])
     @players.owner_id = @players.room.owner_id
-    @players.players = ""
+    @players.players_list = [@players.owner_id]
+    @list = Player.get_mapped_players(@players.players_list)
+
     if @players.save
       render 'v1/players/show'
     else
@@ -18,24 +22,32 @@ class V1::PlayersController < ApplicationController
     end
   end
 
+  def show
+    @room = Room.find_by_name(params[:room_id])
+    username = User.find(params[:id]).username
+
+    unless @room.get_players.include?(username)
+      render json: [error: 'Does not belong to room'], status: 404
+    end
+
+    render 'v1/rooms/show'
+  end
+
   def update
     @players = Player.find(params[:id])
-    # base database cases of null players
-    previous_players = @players.players || ""
+    current_players = decode(@players.players_list) || []
 
     return render json: [error: 'Room has started'], status: 422 if @players.room.started
 
     if params[:status] == 'JOIN'
-      parsed_players = previous_players.split(',')
-      return render json: [error: 'Room is full'], status: 422 if parsed_players.length > 10
-      updated_players = parsed_players.push(params[:playername]).uniq.join(',')
+      return render json: [error: 'Room is full'], status: 422 if current_players.length > 10
+      updated_players = current_players.push(params[:new_player].to_i).uniq
     elsif params[:status] == 'REMOVE'
-      updated_players = previous_players.join(',').dup.delete(params[:playername])
+      updated_players = current_players.delete(params[:new_player].to_i)
     end
 
-    @players.players = updated_players
+    @players.players_list = updated_players
     if @players.save
-
       #send ws broadcast of new players
       broadcast_players_to_room(@players)
       render 'v1/players/show'
@@ -48,9 +60,9 @@ class V1::PlayersController < ApplicationController
 
   def broadcast_players_to_room(players)
     ActionCable.server.broadcast(
-      "room_#{@players.room.id}",
-      roomId: @players.room.id,
-      players: @players.players,
+      "room_#{players.room.id}",
+      roomId: players.room.id,
+      players: players.players_list,
       type: "NEW_PLAYER"
     )
   end

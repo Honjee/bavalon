@@ -15,11 +15,11 @@ class Lobby extends React.Component {
   }
 
   componentDidMount() {
-    const userName = this.props.userName || "roycekim"
-    const roomId = this.props.roomId
-    this.props.getRoomPlayers(roomId).then(
+    const { userName, roomId, playerId, getRoomPlayers, updateRoomPlayers } = this.props
+
+    getRoomPlayers(roomId).then(
       ({ players }) => {
-        return this.props.updateRoomPlayers(players, userName, JOIN)
+        return updateRoomPlayers(players.players, playerId, JOIN)
       }
     )
 
@@ -29,16 +29,15 @@ class Lobby extends React.Component {
   }
 
   componentWillUnMount() {
-    const players = this.props.players
-    const userName = this.props.userName || "roycekim"
-    this.props.updateRoomPlayers(players, userName, REMOVE)
+    const { players, userName, playerId, updateRoomPlayers } = this.props
+    updateRoomPlayers(players, playerId, REMOVE)
     this.App.cable.disconnect()
   }
 
   received (data) {
     switch(data.type) {
       case 'NEW_PLAYER':
-        this.props.updateStorePlayers(data)
+        this.props.getRoomPlayers(this.props.roomId)
         break;
       case 'ROOM_START':
         this.props.updateStoreRoom(data.room)
@@ -47,23 +46,20 @@ class Lobby extends React.Component {
   }
 
   renderPlayers() {
-    const players = (this.props.players  &&
-      this.props.players.getIn(['players'])) || []
+    const list = this.props.list
+    const renderedList = []
 
+    for (let playerId in list) {
+      renderedList.push(
+        <li key={playerId} value={playerId}>{list[playerId]}</li>
+      )
+    }
     return (
       <div className='players-container'>
         <h2>{ "Current Players: " }</h2>
 
         <ul>
-          {
-            players.map((player, idx) => {
-              return <li
-                className={`players-${player.id}`}
-                key={ `${player.id} + ${idx}` }>
-                { player }
-              </li>
-            })
-          }
+          { renderedList }
         </ul>
         <div className='bottom-bar'/>
       </div>
@@ -145,12 +141,14 @@ class Lobby extends React.Component {
 Lobby.propTypes = {
   disableStart: PropTypes.bool,
   createConsumer: PropTypes.func,
+  list: PropTypes.object,
   getRoomPlayers: PropTypes.func,
   room: PropTypes.object,
   roomId: PropTypes.number,
   updateRoomPlayers: PropTypes.func,
   userName: PropTypes.string,
   players: PropTypes.object,
+  playerId: PropTypes.string,
   startRoomGame: PropTypes.func,
   OPTIONS: PropTypes.array,
   updateStorePlayers: PropTypes.func, // adds players to store
