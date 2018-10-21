@@ -28,6 +28,7 @@ class V1::PlayersController < ApplicationController
 
     unless @room.get_players.include?(username)
       render json: [error: 'Does not belong to room'], status: 404
+      return
     end
 
     render 'v1/rooms/show'
