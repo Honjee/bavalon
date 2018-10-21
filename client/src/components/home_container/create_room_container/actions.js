@@ -1,4 +1,5 @@
 import * as RoomApi from '../../../shared/api/room'
+import { checkPlayerInRoom } from '../../../shared/api/players'
 
 export const RECEIVE_ROOM = 'RECEIVE_ROOM'
 export const RECEIVE_ROOM_ERROR = 'RECEIVE_ROOM_ERROR'
@@ -35,4 +36,14 @@ export const updateRoom = room => dispatch => (
     errors => dispatch(receiveErrors(errors))
   )
 )
+
 export const updateStoreRoom = room => dispatch => dispatch(receiveRoom(room))
+
+export const playerInRoom = (roomName, playerId) => dispatch => (
+  checkPlayerInRoom(roomName, playerId).then(
+    room => dispatch(receiveRoom(room)),
+    errors => {
+      dispatch(receiveErrors(errors))
+    }
+  )
+)

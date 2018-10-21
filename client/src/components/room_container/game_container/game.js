@@ -5,16 +5,41 @@ import PropTypes from 'prop-types'
 
 class Game extends React.Component {
   componentDidMount() {
-    this.props.fetchRoom(this.props.roomName).then(
+    const { roomName, playerId } = this.props
+    this.props.playerInRoom(roomName, playerId).then(
       () => this.props.getRoomPlayers(this.props.roomId)
     )
   }
 
+  renderPlayers() {
+    const list = this.props.list
+    const playerId = parseInt(this.props.playerId)
+    const renderedList = []
+
+    for (let id in list) {
+      const isYou = id === this.props.playerId ? 'isYou' : ''
+      renderedList.push(
+        <li className={isYou} key={`game-${id}`}>{ list[id] }</li>
+      )
+    }
+
+    return <ul className='player-list'>
+      { renderedList }
+    </ul>
+  }
+
   render() {
+    const { roomName, roomId, currentMission } = this.props
+    const player_list = this.renderPlayers()
+
     return (
-      <div>
-        { this.props.roomName }
-        { this.props.currentMission }
+      <div className={`game-main-${roomId}`}>
+        <header className={`game-header`}>
+          { roomName }
+          { currentMission }
+        </header>
+
+        { player_list }
       </div>
 
     )
@@ -23,9 +48,13 @@ class Game extends React.Component {
 
 Game.propTypes = {
   currentMission: PropTypes.number,
+  list: PropTypes.object,
   fetchRoom: PropTypes.func,
   getRoomPlayers: PropTypes.func,
+  playerCount: PropTypes.number,
+  playerId: PropTypes.string,
   players: PropTypes.object,
+  playerInRoom: PropTypes.func,
   roomId: PropTypes.number,
   roomName: PropTypes.string,
   room: PropTypes.object,

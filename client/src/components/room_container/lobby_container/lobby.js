@@ -51,7 +51,7 @@ class Lobby extends React.Component {
 
     for (let playerId in list) {
       renderedList.push(
-        <li key={playerId} value={playerId}>{list[playerId]}</li>
+        <li key={`lobby-${playerId}`} value={playerId}>{list[playerId]}</li>
       )
     }
     return (

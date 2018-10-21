@@ -2,11 +2,11 @@ import Game from './game'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import { getRoom } from '../../home_container/create_room_container/actions'
+import { getRoom, playerInRoom } from '../../home_container/create_room_container/actions'
 import { getRoomPlayers } from '../actions'
 
 const mapStateToProps = (state, ownProps) => {
-  const players = state.getIn(['players', 'players'])
+  const players = state.getIn(['players', 'room_players'])
   const session = state.getIn(['session'])
   const [ ...keys ] = session.keys()
   const userName = session.getIn([keys[0], 'username'])
@@ -14,9 +14,15 @@ const mapStateToProps = (state, ownProps) => {
   const roomName = room.get('name')
   const roomId = room.get('id')
   const currentMission = room.get('current_mission')
+  const playerId = keys[0]
+  const list = JSON.parse(players.get('list', '{}'))
+  const playerCount = list && Object.keys(list).length
 
   return {
     currentMission,
+    list,
+    playerCount,
+    playerId,
     players,
     room,
     roomId,
@@ -27,6 +33,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    playerInRoom: (roomName, playerId) => {
+      return dispatch(playerInRoom(roomName, playerId)
+    )},
     fetchRoom: room => dispatch(getRoom(room)),
     getRoomPlayers: roomId => dispatch(getRoomPlayers(roomId))
   }
