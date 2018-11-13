@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 // import { Link } from 'react-router-dom'
 // import Style from './style.css'
 
+import PlayerCard from '../../player_card'
+
 class Game extends React.Component {
   componentDidMount() {
     const { roomName, playerId } = this.props
@@ -19,11 +21,16 @@ class Game extends React.Component {
     for (let id in list) {
       const isYou = id === this.props.playerId ? 'isYou' : ''
       renderedList.push(
-        <li className={isYou} key={`game-${id}`}>{ list[id] }</li>
+        <PlayerCard
+          key={`player-card-${id}`}
+          id={id}
+          isYou={isYou}
+          name={list[id]}
+          />
       )
     }
 
-    return <ul className='player-list'>
+    return <ul className='player-card-list'>
       { renderedList }
     </ul>
   }
