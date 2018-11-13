@@ -16,4 +16,12 @@ class Role < ApplicationRecord
 
   belongs_to :user
   belongs_to :room
+
+  def is_evil?
+    self.affinity == 'evil'
+  end
+
+  def is_merlin?
+    self.role == 'MERLIN'
+  end
 end

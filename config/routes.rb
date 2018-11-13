@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
     resources :rooms, only: [:show] do
       resources :players, only: [:index, :show, :create, :update]
+      resources :roles, only: [:show]
     end
   end
 
