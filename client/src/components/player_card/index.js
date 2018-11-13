@@ -6,7 +6,9 @@ import Style from './style.css'
 const PlayerCard = ({id, isCandidate, isKing, isYou, name}) => {
   return(
     <li key={`player-card-${id}`}>
-      <div className={`player-card ${isKing} ${isCandidate} ${isYou}`}>{ name }</div>
+      <div className={`player-card ${isKing} ${isCandidate} ${isYou}`}>
+        { name }
+      </div>
     </li>
   )
 }
