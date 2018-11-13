@@ -27,8 +27,8 @@ class Room < ApplicationRecord
     players.split(',').include?(player)
   end
 
-  def assign_role(player_name, role_name, affinity)
-    player = User.find_by_username(player_name)
+  def assign_role(player_id, role_name, affinity)
+    player = User.find(player_id)
     role = Role.new({
       user_id: player.id,
       room_id: self.id,
@@ -39,6 +39,6 @@ class Room < ApplicationRecord
   end
 
   def get_players()
-    self.player.first.players.split(',')
+    JSON.parse(self.player.first.players_list)
   end
 end

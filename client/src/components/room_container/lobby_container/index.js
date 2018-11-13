@@ -12,24 +12,26 @@ import { hasMordred, hasOberon } from '../../../shared/constants/minions'
 import { hasPercival } from '../../../shared/constants/villagers'
 
 const mapStateToProps = (state) => {
-  const players = state.getIn(['players', 'players'])
+  const players = state.getIn(['players', 'room_players'])
   const createConsumer = C.createConsumer
   const session = state.getIn(['session'])
   const [ ...keys ] = session.keys()
   const userName = session.getIn([keys[0], 'username'])
   const room = state.getIn(['room', 'room'])
   const OPTIONS = [hasMordred, hasOberon, hasPercival]
-  const playerList = players.get('players')
-  const playerCount = playerList && playerList.size
+  const list = JSON.parse(players.get('list', '{}'))
+  const playerCount = list && Object.keys(list).length
   const disableStart = !playerCount || playerCount < 5
 
   return {
-    room,
-    disableStart,
     createConsumer,
+    disableStart,
+    list,
+    OPTIONS,
     players,
-    userName,
-    OPTIONS
+    playerId: keys[0],
+    room,
+    userName
   }
 }
 
