@@ -24,9 +24,8 @@ class V1::PlayersController < ApplicationController
 
   def show
     @room = Room.find_by_name(params[:room_id])
-    username = User.find(params[:id]).username
-
-    unless @room.get_players.include?(username)
+    player_id = params[:id].to_i
+    unless @room.get_players.include?(player_id)
       render json: [error: 'Does not belong to room'], status: 404
       return
     end

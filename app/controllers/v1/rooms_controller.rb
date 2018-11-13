@@ -69,7 +69,7 @@ class V1::RoomsController < ApplicationController
     roles = get_roles(room)
     role_keys = roles.keys.shuffle
 
-    JSON.parse(players).each do |player|
+    players.each do |player|
       role = role_keys.pop() || :VILLAGER
       affinity = roles[role] || :good
       room.assign_role(player, role, affinity)

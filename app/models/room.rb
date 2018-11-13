@@ -39,6 +39,6 @@ class Room < ApplicationRecord
   end
 
   def get_players()
-    self.player.first.players_list
+    JSON.parse(self.player.first.players_list)
   end
 end
