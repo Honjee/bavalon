@@ -12,6 +12,8 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+vendor
+.keep
 
 .byebug_history
 node_modules
