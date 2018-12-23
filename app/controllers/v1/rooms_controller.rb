@@ -11,6 +11,7 @@ class V1::RoomsController < ApplicationController
     @room.owner_id = current_user.id if !@room.owner_id && current_user
 
     if @room.save
+      @room.create_missions
       render 'v1/rooms/show'
     else
       render json: @room.errors.full_messages, status: 422

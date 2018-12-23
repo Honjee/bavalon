@@ -1,0 +1,33 @@
+.player-card-list {
+  border: 1px dotted green;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
+.player-card {
+  border: 1px solid grey;
+  width: auto;
+  flex: 1;
+  border-radius: 3px;
+  padding: 5px;
+  margin: 5px;
+  font-size: 25px;
+}
+
+.player-card:hover {
+  cursor: pointer;
+}
+
+.player-card.isYou {
+  background: red;
+}
+
+li .player-card.isCandidate {
+  background: orange;
+}
+
+li .player-card.isKing {
+  border: 2px groove yellow;
+  margin: 4px;
+}

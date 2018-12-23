@@ -41,4 +41,24 @@ class Room < ApplicationRecord
   def get_players()
     JSON.parse(self.player.first.players_list)
   end
+
+  def get_num_players()
+    self.get_players.count
+  end
+
+  def create_missions()
+    player_count = self.get_num_players
+
+    5.times do |i|
+      missionNo = i + 1
+      mission = Mission.new({
+        round: missionNo,
+        room_id: self.id,
+        num_voters: player_count,
+        need_two_fails: Mission.needs_two_fails?(player_count, missionNo)
+      })
+
+      mission.save
+    end
+  end
 end

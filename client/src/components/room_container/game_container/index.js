@@ -17,10 +17,12 @@ const mapStateToProps = (state, ownProps) => {
   const playerId = keys[0]
   const list = JSON.parse(players.get('list', '{}'))
   const playerCount = list && Object.keys(list).length
+  const missions = room.get('missions')
 
   return {
     currentMission,
     list,
+    missions,
     playerCount,
     playerId,
     players,

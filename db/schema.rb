@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180925232124) do
+ActiveRecord::Schema.define(version: 20181222230534) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20180925232124) do
     t.integer "good_wins", default: 0, null: false
     t.integer "bad_wins", default: 0, null: false
     t.integer "num_voters", null: false
-    t.boolean "need_two_fails", default: false, null: false
+    t.boolean "need_two_fails", default: false
     t.index ["room_id", "round"], name: "index_missions_on_room_id_and_round", unique: true
   end
 

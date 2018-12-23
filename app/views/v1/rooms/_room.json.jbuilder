@@ -1,1 +1,1 @@
-json.extract! room, :id, :hasMordred, :hasPercival, :hasOberon, :current_mission, :name, :started
+json.extract! room, :id, :hasMordred, :hasPercival, :hasOberon, :current_mission, :name, :started, :missions
