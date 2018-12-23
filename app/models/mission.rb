@@ -12,9 +12,12 @@
 #
 
 class Mission < ApplicationRecord
-  validates :room_id, :round, :good_wins, :bad_wins, :num_voters,
-            :need_two_fails, presence: true
+  validates :room_id, :round, :good_wins, :bad_wins, :num_voters, presence: true
 
   belongs_to :room
-  has_many :votes 
+  has_many :votes
+
+  def self.needs_two_fails? (player_count, missionNo)
+    player_count >= 7 && missionNo == 4
+  end
 end
